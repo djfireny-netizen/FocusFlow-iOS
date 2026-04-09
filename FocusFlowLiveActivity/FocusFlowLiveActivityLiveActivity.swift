@@ -107,50 +107,44 @@ struct FocusLiveActivityView: View {
                 .frame(height: 6)
                 .padding(.horizontal, 20)
                 
-                // 倒计时
-                Text(formattedTime(context.state.timeRemaining))
-                    .font(.system(size: 56, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                
-                // 操作按钮
-                HStack(spacing: 20) {
-                    // 停止按钮
-                    Button(action: {
-                        // TODO: 调用停止方法
-                    }) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "stop.fill")
-                                .font(.title3)
-                            Text("停止")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                        }
+                // 倒计时和操作按钮
+                HStack(alignment: .center, spacing: 0) {
+                    // 倒计时（靠左）
+                    Text(formattedTime(context.state.timeRemaining))
+                        .font(.system(size: 48, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.red.opacity(0.8))
-                        .cornerRadius(12)
-                    }
                     
-                    // 暂停/继续按钮
-                    Button(action: {
-                        // TODO: 调用暂停/继续方法
-                    }) {
-                        HStack(spacing: 6) {
+                    Spacer()
+                    
+                    // 操作按钮（靠右）
+                    HStack(spacing: 16) {
+                        // 暂停/继续按钮
+                        Button(action: {
+                            // TODO: 调用暂停/继续方法
+                        }) {
                             Image(systemName: context.state.isPaused ? "play.fill" : "pause.fill")
-                                .font(.title3)
-                            Text(context.state.isPaused ? "继续" : "暂停")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .frame(width: 44, height: 44)
+                                .background(Color.white.opacity(0.2))
+                                .cornerRadius(22)
                         }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.white.opacity(0.2))
-                        .cornerRadius(12)
+                        
+                        // 停止按钮
+                        Button(action: {
+                            // TODO: 调用停止方法
+                        }) {
+                            Image(systemName: "stop.fill")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .frame(width: 44, height: 44)
+                                .background(Color.red.opacity(0.8))
+                                .cornerRadius(22)
+                        }
                     }
                 }
-                .padding(.top, 4)
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
             }
             .padding(.vertical, 20)
         }
