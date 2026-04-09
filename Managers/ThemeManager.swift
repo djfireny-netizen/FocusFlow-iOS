@@ -12,24 +12,30 @@ enum ThemeType: String, CaseIterable, Identifiable {
     
     var id: String { rawValue }
     
-    // 主题渐变颜色
+    // 主题渐变颜色（优化为深色背景，确保图标清晰可见）
     var colors: [Color] {
         switch self {
         case .default:
-            // 原来的深色主题
+            // 深色蓝黑主题
             return [Color(hex: "1a1a2e"), Color(hex: "16213e"), Color(hex: "0f3460")]
         case .rain:
-            return [Color(hex: "2c3e50"), Color(hex: "4a6274"), Color(hex: "667eea")]
+            // 深蓝灰主题
+            return [Color(hex: "1e2a3a"), Color(hex: "2c3e50"), Color(hex: "3d5a80")]
         case .ocean:
-            return [Color(hex: "00b4db"), Color(hex: "0083b0"), Color(hex: "00d2ff")]
+            // 深海蓝主题（降低亮度）
+            return [Color(hex: "0a3d62"), Color(hex: "0c2461"), Color(hex: "1e3799")]
         case .forest:
-            return [Color(hex: "134e5e"), Color(hex: "71b280"), Color(hex: "a8e063")]
+            // 深森林主题
+            return [Color(hex: "0a3d2e"), Color(hex: "134e3a"), Color(hex: "1e6f4f")]
         case .cafe:
-            return [Color(hex: "8e6e53"), Color(hex: "c79081"), Color(hex: "dfa579")]
+            // 深咖啡主题
+            return [Color(hex: "3e2723"), Color(hex: "4e342e"), Color(hex: "5d4037")]
         case .fireplace:
-            return [Color(hex: "f12711"), Color(hex: "f5af19"), Color(hex: "ff6b35")]
+            // 深壁炉主题（降低亮度）
+            return [Color(hex: "4a1c1c"), Color(hex: "6b2c2c"), Color(hex: "8b3a3a")]
         case .wind:
-            return [Color(hex: "89f7fe"), Color(hex: "66a6ff"), Color(hex: "a1c4fd")]
+            // 深风主题（降低亮度）
+            return [Color(hex: "1a3a52"), Color(hex: "2c5364"), Color(hex: "3d6b8e")]
         }
     }
     
