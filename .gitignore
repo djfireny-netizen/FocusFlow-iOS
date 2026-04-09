@@ -1,0 +1,55 @@
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+*.xcscmblueprint
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Checkouts
+Carthage/Builds
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Packages/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Node
+node_modules/
+
+# App Store Connect
+*.mobileprovision
+*.p12
+*.key
+
+# Environment
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# Documentation (optional - keep only code)
+# *.md
+# !README.md
