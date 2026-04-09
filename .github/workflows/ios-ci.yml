@@ -1,0 +1,156 @@
+name: iOS CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # 1. 代码质量检查
+  lint:
+    name: 代码质量检查
+    runs-on: macos-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 安装 SwiftLint
+        run: brew install swiftlint
+      
+      - name: 运行 SwiftLint
+        run: swiftlint --strict
+        continue-on-error: true  # 不阻塞流程，仅警告
+
+  # 2. 自动构建
+  build:
+    name: 构建验证
+    runs-on: macos-latest
+    needs: lint
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 选择 Xcode 版本
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+      
+      - name: 显示 Xcode 版本
+        run: xcodebuild -version
+      
+      - name: 清理构建
+        run: xcodebuild clean -project FocusFlow.xcodeproj -scheme FocusFlow
+      
+      - name: 构建 iOS 应用
+        run: |
+          xcodebuild build \
+            -project FocusFlow.xcodeproj \
+            -scheme FocusFlow \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+      
+      - name: 构建 Watch 应用（如果存在）
+        run: |
+          if [ -d "WatchFocusFlow" ]; then
+            xcodebuild build \
+              -project FocusFlow.xcodeproj \
+              -scheme WatchFocusFlow \
+              -configuration Release \
+              -destination 'generic/platform=watchOS' \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO \
+              CODE_SIGNING_ALLOWED=NO
+          fi
+        continue-on-error: true
+
+  # 3. 运行单元测试
+  test:
+    name: 单元测试
+    runs-on: macos-latest
+    needs: build
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 运行测试
+        run: |
+          xcodebuild test \
+            -project FocusFlow.xcodeproj \
+            -scheme FocusFlow \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+        continue-on-error: true  # 暂时没有测试用例
+
+  # 4. 构建 Archive（用于 TestFlight）
+  archive:
+    name: 构建 Archive
+    runs-on: macos-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'  # 仅在 main 分支执行
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 选择 Xcode 版本
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+      
+      - name: 构建 Archive
+        run: |
+          xcodebuild archive \
+            -project FocusFlow.xcodeproj \
+            -scheme FocusFlow \
+            -configuration Release \
+            -archivePath ./build/FocusFlow.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+      
+      - name: 导出 IPA
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath ./build/FocusFlow.xcarchive \
+            -exportPath ./build/ \
+            -exportOptionsPlist ExportOptions.plist \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+        continue-on-error: true  # 需要证书配置
+      
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: FocusFlow-Archive
+          path: ./build/
+          retention-days: 7
+
+  # 5. 生成构建报告
+  report:
+    name: 生成报告
+    runs-on: macos-latest
+    needs: [build, test]
+    if: always()
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 计算代码行数
+        run: |
+          echo "## 📊 代码统计" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Swift 文件" >> $GITHUB_STEP_SUMMARY
+          find . -name "*.swift" -not -path "./Pods/*" | wc -l | xargs -I {} echo "- Swift 文件数: {}" >> $GITHUB_STEP_SUMMARY
+          find . -name "*.swift" -not -path "./Pods/*" | xargs wc -l | tail -1 | awk '{print "- 总代码行数: " $1}' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 项目结构" >> $GITHUB_STEP_SUMMARY
+          echo "- Managers: $(find Managers -name "*.swift" | wc -l | xargs) 文件" >> $GITHUB_STEP_SUMMARY
+          echo "- Views: $(find Views -name "*.swift" | wc -l | xargs) 文件" >> $GITHUB_STEP_SUMMARY
+          echo "- Models: $(find Models -name "*.swift" | wc -l | xargs) 文件" >> $GITHUB_STEP_SUMMARY

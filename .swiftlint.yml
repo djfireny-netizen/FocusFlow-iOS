@@ -1,0 +1,67 @@
+# SwiftLint 配置文件
+# 用于代码质量检查
+
+# 规则配置
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+  - missing_docs
+  - vertical_whitespace_opening_braces
+
+# 禁用的规则
+disabled_rules:
+  - trailing_whitespace
+  - line_length  # 行长度限制暂时禁用
+  - function_body_length  # 函数体长度暂时禁用
+  - type_body_length  # 类型体长度暂时禁用
+
+# 标识符命名规则
+identifier_name:
+  min_length: 2
+  max_length: 50
+  excluded:
+    - id
+    - x
+    - y
+    - i
+    - j
+
+# 文件长度限制
+file_length:
+  warning: 500
+  error: 1000
+
+# 函数参数数量
+function_parameter_count:
+  warning: 5
+  error: 8
+
+# cyclomatic complexity (圈复杂度)
+cyclomatic_complexity:
+  warning: 15
+  error: 25
+
+# 排除的文件和目录
+excluded:
+  - Carthage
+  - Pods
+  - .build
+  - DerivedData
+  - "*/Resources/*"
+  - "*/Assets.xcassets/*"
+
+# 自定义规则
+custom_rules:
+  # 禁止使用 print 调试语句
+  no_print:
+    name: "No Print Statements"
+    regex: "\\bprint\\s*\\("
+    message: "Production code should not use print statements. Use proper logging."
+    severity: warning
+  
+  # 鼓励使用 guard 而不是复杂的 if-else
+  prefer_guard:
+    name: "Prefer Guard Statement"
+    regex: "if\\s+let\\s+\\w+\\s*=\\s*\\w+\\s*\\{[^}]*return"
+    message: "Consider using guard let for early returns"
+    severity: warning
