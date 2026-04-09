@@ -1010,6 +1010,7 @@ final class Achievement {
 }
 
 enum AchievementType: String, Codable {
+    // 基础成就
     case firstSession = "first_session"
     case tenSessions = "ten_sessions"
     case fiftySessions = "fifty_sessions"
@@ -1019,4 +1020,32 @@ enum AchievementType: String, Codable {
     case earlyBird = "early_bird"
     case nightOwl = "night_owl"
     case marathon = "marathon"
+    
+    // 新增成就 - 提升留存
+    case twoHundredSessions = "two_hundred_sessions"  // 200次专注
+    case fiveHundredSessions = "five_hundred_sessions"  // 500次专注
+    case sevenDayStreak = "seven_day_streak"  // 7天连续
+    case fourteenDayStreak = "fourteen_day_streak"  // 14天连续
+    case sixtyDayStreak = "sixty_day_streak"  // 60天连续
+    case hundredDayStreak = "hundred_day_streak"  // 100天连续
+    
+    // 时长成就
+    case tenHoursFocus = "ten_hours_focus"  // 10小时
+    case fiftyHoursFocus = "fifty_hours_focus"  // 50小时
+    case twoHundredHoursFocus = "two_hundred_hours_focus"  // 200小时
+    case fiveHundredHoursFocus = "five_hundred_hours_focus"  // 500小时
+    case thousandHoursFocus = "thousand_hours_focus"  // 1000小时
+    
+    // 特殊成就
+    case perfectDay = "perfect_day"  // 完美一天（8个番茄）
+    case superMarathon = "super_marathon"  // 单次专注2小时
+    case weeklyGoal10 = "weekly_goal_10"  // 10次达成周目标
+    case monthlyGoal30 = "monthly_goal_30"  // 30次达成月目标
+    case useAllSounds = "use_all_sounds"  // 使用所有白噪音
+    case exploreCategories = "explore_categories"  // 使用所有分类
+    case shareAchievement = "share_achievement"  // 分享成就
+    case exportData = "export_data"  // 导出数据
+    case earlyAdopter = "early_adopter"  // 早期用户
+    case premiumMember = "premium_member"  // Premium 会员
+    case themeCollector = "theme_collector"  // 主题收藏家
 }
