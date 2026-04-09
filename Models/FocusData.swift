@@ -16,11 +16,11 @@ class LanguageManager: ObservableObject {
     
     // 支持的语言
     let supportedLanguages = [
-        (code: "auto", name: "跟随系统", nameEn: "System"),
-        (code: "zh", name: "简体中文", nameEn: "Simplified Chinese"),
-        (code: "zh-Hant", name: "繁體中文", nameEn: "Traditional Chinese"),
-        (code: "en", name: "English", nameEn: "English"),
-        (code: "ja", name: "日本語", nameEn: "Japanese")
+        (code: "auto", name: "跟随系统"),
+        (code: "zh", name: "简体中文"),
+        (code: "zh-Hant", name: "繁體中文"),
+        (code: "en", name: "English"),
+        (code: "ja", name: "日本語")
     ]
     
     private init() {
@@ -58,7 +58,7 @@ class LanguageManager: ObservableObject {
             return isChinese ? "跟随系统" : "System"
         }
         if let lang = supportedLanguages.first(where: { $0.code == code }) {
-            return isChinese ? lang.name : lang.nameEn
+            return lang.name  // 始终使用 name，不进行本地化
         }
         return code
     }

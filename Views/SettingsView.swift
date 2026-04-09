@@ -788,7 +788,7 @@ struct LanguageOptionButton: View {
     @StateObject private var languageManager = LanguageManager.shared
     
     var displayName: String {
-        languageManager.isChinese ? lang.name : lang.nameEn
+        lang.name  // 始终使用 name，不进行本地化
     }
     
     var body: some View {
