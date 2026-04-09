@@ -16,7 +16,8 @@ enum ThemeType: String, CaseIterable, Identifiable {
     var colors: [Color] {
         switch self {
         case .default:
-            return [Color(hex: "ff6b35"), Color(hex: "4facfe")]
+            // 原来的深色主题
+            return [Color(hex: "1a1a2e"), Color(hex: "16213e"), Color(hex: "0f3460")]
         case .rain:
             return [Color(hex: "2c3e50"), Color(hex: "4a6274"), Color(hex: "667eea")]
         case .ocean:
