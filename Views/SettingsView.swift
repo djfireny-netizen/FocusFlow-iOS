@@ -781,7 +781,7 @@ struct LanguagePickerView: View {
 
 // MARK: - 语言选项按钮
 struct LanguageOptionButton: View {
-    let lang: (code: String, name: String, nameEn: String)
+    let lang: (code: String, name: String)
     let isSelected: Bool
     let action: () -> Void
     
@@ -875,7 +875,7 @@ struct LanguageOptionButton: View {
 struct ThemePickerView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var themeManager = ThemeManager.shared
-    @StateObject private var subscriptionManager = SubscriptionManager.shared
+    @EnvironmentObject var subscriptionManager: SubscriptionManager
     
     var body: some View {
         NavigationView {

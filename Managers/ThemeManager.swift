@@ -100,7 +100,7 @@ class ThemeManager: ObservableObject {
     }
     
     // 根据白噪音自动切换主题
-    func updateTheme(for soundType: SoundType) {
+    func updateTheme(for soundType: WhiteNoiseType) {
         guard autoSwitch else { return }
         
         let theme = soundType.theme
@@ -112,8 +112,8 @@ class ThemeManager: ObservableObject {
     }
 }
 
-// MARK: - SoundType 扩展
-extension SoundType {
+// MARK: - WhiteNoiseType 扩展
+extension WhiteNoiseType {
     var theme: ThemeType {
         switch self {
         case .rain: return .rain
@@ -130,7 +130,7 @@ extension SoundType {
 // MARK: - 主题背景视图
 struct ThemeBackgroundView: View {
     @StateObject private var themeManager = ThemeManager.shared
-    @StateObject private var soundManager = SoundManager.shared
+    @EnvironmentObject var soundManager: SoundManager
     
     var body: some View {
         ZStack {
