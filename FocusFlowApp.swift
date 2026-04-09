@@ -42,10 +42,10 @@ struct FocusFlowApp: App {
                         }
                     }
                     
-                    // 激活 Watch 通信
-                    if WCSession.isSupported() {
-                        iPhoneConnectivityManager.shared.activate()
-                    }
+                    // 激活 Watch 通信（暂时注释，等待 Watch Target 创建后启用）
+                    // if WCSession.isSupported() {
+                    //     iPhoneConnectivityManager.shared.activate()
+                    // }
                     
                     // 更新小组件数据
                     updateWidgetData()
@@ -53,8 +53,8 @@ struct FocusFlowApp: App {
                     // 设置计时器与白噪音的联动 - 在App级别确保切换标签页不会停止白噪音
                     setupTimerSoundBinding()
                     
-                    // 监听 Watch 命令
-                    setupWatchCommandListener()
+                    // 监听 Watch 命令（暂时注释，等待 Watch Target 创建后启用）
+                    // setupWatchCommandListener()
                 }
         }
         .modelContainer(sharedModelContainer)
@@ -77,7 +77,8 @@ struct FocusFlowApp: App {
         }
     }
     
-    // MARK: - 监听 Watch 命令
+    // MARK: - 监听 Watch 命令（暂时注释，等待 Watch Target 创建后启用）
+    /*
     private func setupWatchCommandListener() {
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name("WatchCommandReceived"),
@@ -122,6 +123,7 @@ struct FocusFlowApp: App {
         )
         iPhoneConnectivityManager.shared.sendTimerState(state)
     }
+    */
     
     // MARK: - 更新小组件数据
     private func updateWidgetData() {

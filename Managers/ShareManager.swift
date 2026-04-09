@@ -103,89 +103,172 @@ struct StatsShareCardView: View {
     
     var body: some View {
         ZStack {
-            // 背景渐变
+            // 主背景渐变
             LinearGradient(
-                colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
+                colors: [
+                    Color(hex: "667eea"),
+                    Color(hex: "764ba2"),
+                    Color(hex: "f093fb")
+                ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
             
-            VStack(spacing: 24) {
-                // 标题
-                HStack {
-                    Image(systemName: "timer")
-                        .font(.title2)
-                    Text("FocusFlow")
-                        .font(.title2)
-                        .fontWeight(.bold)
+            // 装饰圆形
+            Circle()
+                .fill(Color.white.opacity(0.1))
+                .frame(width: 300, height: 300)
+                .offset(x: -100, y: -200)
+                .blur(radius: 40)
+            
+            Circle()
+                .fill(Color.yellow.opacity(0.15))
+                .frame(width: 200, height: 200)
+                .offset(x: 150, y: 100)
+                .blur(radius: 30)
+            
+            VStack(spacing: 28) {
+                // 品牌头部
+                HStack(spacing: 12) {
+                    // Logo 圆圈
+                    ZStack {
+                        Circle()
+                            .fill(Color.white.opacity(0.25))
+                            .frame(width: 48, height: 48)
+                        
+                        Image(systemName: "timer")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("FocusFlow")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        Text("专注流")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                    
+                    Spacer()
+                    
+                    // 日期
+                    Text(Date(), style: .date)
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.8))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Color.white.opacity(0.15))
+                        .cornerRadius(12)
                 }
-                .foregroundColor(.white)
                 
                 Divider()
                     .background(Color.white.opacity(0.3))
                 
-                // 今日专注
-                VStack(spacing: 16) {
+                // 核心数据 - 大数字展示
+                VStack(spacing: 12) {
                     Text("今日专注")
-                        .font(.headline)
+                        .font(.subheadline)
                         .foregroundColor(.white.opacity(0.9))
+                        .fontWeight(.medium)
                     
-                    HStack(spacing: 30) {
-                        StatItem(
-                            icon: "clock.fill",
-                            value: "\(todayHours)小时\(todayMinutes)分钟",
-                            label: "专注时长"
-                        )
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("\(todayHours)")
+                            .font(.system(size: 64, weight: .bold, design: .rounded))
                         
-                        StatItem(
-                            icon: "checkmark.circle.fill",
-                            value: "\(todaySessions)次",
-                            label: "完成番茄钟"
-                        )
+                        Text("小时")
+                            .font(.title2)
+                            .foregroundColor(.white.opacity(0.9))
+                        
+                        Text("\(todayMinutes)")
+                            .font(.system(size: 64, weight: .bold, design: .rounded))
+                        
+                        Text("分钟")
+                            .font(.title2)
+                            .foregroundColor(.white.opacity(0.9))
                     }
+                    .foregroundColor(.white)
                 }
-                .padding()
-                .background(Color.white.opacity(0.15))
-                .cornerRadius(16)
+                .padding(.vertical, 20)
+                .padding(.horizontal, 24)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white.opacity(0.15))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                        )
+                )
                 
-                // 累计成就
-                VStack(spacing: 16) {
-                    Text("累计成就")
-                        .font(.headline)
-                        .foregroundColor(.white.opacity(0.9))
+                // 详细统计网格
+                LazyVGrid(columns: [
+                    GridItem(.flexible()),
+                    GridItem(.flexible())
+                ], spacing: 16) {
+                    // 今日番茄钟
+                    StatCardModern(
+                        icon: "checkmark.circle.fill",
+                        iconColor: .green,
+                        value: "\(todaySessions)",
+                        label: "今日番茄钟",
+                        unit: "个"
+                    )
                     
-                    HStack(spacing: 30) {
-                        StatItem(
-                            icon: "chart.bar.fill",
-                            value: "\(totalSessions)次",
-                            label: "总专注次数"
-                        )
-                        
-                        StatItem(
-                            icon: "flame.fill",
-                            value: "\(currentStreak)天",
-                            label: "连续专注"
-                        )
-                    }
+                    // 总专注次数
+                    StatCardModern(
+                        icon: "chart.bar.fill",
+                        iconColor: .blue,
+                        value: "\(totalSessions)",
+                        label: "总专注次数",
+                        unit: "次"
+                    )
+                    
+                    // 连续专注
+                    StatCardModern(
+                        icon: "flame.fill",
+                        iconColor: .orange,
+                        value: "\(currentStreak)",
+                        label: "连续专注",
+                        unit: "天"
+                    )
+                    
+                    // 总专注时长（估算）
+                    StatCardModern(
+                        icon: "clock.fill",
+                        iconColor: .purple,
+                        value: "\(totalSessions * 25 / 60)",
+                        label: "总专注时长",
+                        unit: "小时"
+                    )
                 }
-                .padding()
-                .background(Color.white.opacity(0.15))
-                .cornerRadius(16)
                 
                 Spacer()
                 
-                // 底部标语
-                VStack(spacing: 8) {
-                    Text("让专注成为一种习惯! 💪")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.9))
+                // 底部品牌区
+                VStack(spacing: 12) {
+                    Divider()
+                        .background(Color.white.opacity(0.3))
                     
-                    Text("#FocusFlow #专注力 #番茄钟")
+                    HStack(spacing: 8) {
+                        Image(systemName: "sparkles")
+                            .foregroundColor(.yellow)
+                        
+                        Text("让专注成为一种习惯")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                        
+                        Image(systemName: "sparkles")
+                            .foregroundColor(.yellow)
+                    }
+                    .foregroundColor(.white)
+                    
+                    Text("#FocusFlow #专注力 #番茄钟 #效率工具")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.7))
                 }
             }
-            .padding(30)
+            .padding(32)
         }
     }
 }
@@ -199,57 +282,113 @@ struct AchievementShareCardView: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color(hex: "f093fb"), Color(hex: "f5576c")],
+                colors: [
+                    Color(hex: "f093fb"),
+                    Color(hex: "f5576c"),
+                    Color(hex: "ff6b6b")
+                ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
             
-            VStack(spacing: 30) {
-                Image(systemName: "trophy.fill")
-                    .font(.system(size: 60))
-                    .foregroundColor(.yellow)
-                
-                Text("🎉 成就解锁!")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-                HStack(spacing: 20) {
-                    Image(systemName: icon)
-                        .font(.system(size: 50))
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color.white.opacity(0.2))
-                        .clipShape(Circle())
+            // 装饰元素
+            Circle()
+                .fill(Color.yellow.opacity(0.2))
+                .frame(width: 250, height: 250)
+                .offset(x: 120, y: -150)
+                .blur(radius: 50)
+            
+            VStack(spacing: 32) {
+                // 头部
+                HStack {
+                    Image(systemName: "sparkles")
+                        .foregroundColor(.yellow)
+                        .font(.title2)
                     
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(title)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                        
-                        Text(description)
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.9))
-                    }
+                    Text("成就解锁")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "trophy.fill")
+                        .foregroundColor(.yellow)
+                        .font(.title2)
                 }
-                .padding()
-                .background(Color.white.opacity(0.15))
-                .cornerRadius(16)
+                .foregroundColor(.white)
+                
+                Divider()
+                    .background(Color.white.opacity(0.3))
+                
+                // 成就图标
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.2))
+                        .frame(width: 140, height: 140)
+                    
+                    Circle()
+                        .stroke(Color.white.opacity(0.4), lineWidth: 3)
+                        .frame(width: 140, height: 140)
+                    
+                    Image(systemName: icon)
+                        .font(.system(size: 60))
+                        .foregroundColor(.white)
+                }
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
+                
+                // 成就信息
+                VStack(spacing: 16) {
+                    Text(title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                    
+                    Text(description)
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white.opacity(0.95))
+                        .padding(.horizontal)
+                }
+                .foregroundColor(.white)
+                .padding(.vertical, 24)
+                .padding(.horizontal, 20)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white.opacity(0.15))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                        )
+                )
                 
                 Spacer()
                 
-                VStack(spacing: 8) {
-                    Text("通过 FocusFlow 达成! 🚀")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.9))
+                // 底部
+                VStack(spacing: 12) {
+                    Divider()
+                        .background(Color.white.opacity(0.3))
                     
-                    Text("#FocusFlow #成就达成")
+                    HStack(spacing: 8) {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                            .font(.caption)
+                        
+                        Text("通过 FocusFlow 达成")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                        
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                            .font(.caption)
+                    }
+                    .foregroundColor(.white)
+                    
+                    Text("#FocusFlow #成就达成 #专注力")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.7))
                 }
             }
-            .padding(30)
+            .padding(32)
         }
     }
 }
@@ -259,81 +398,205 @@ struct GoalShareCardView: View {
     let goalMinutes: Int
     let completedMinutes: Int
     
+    var progress: Double {
+        min(1.0, Double(completedMinutes) / Double(goalMinutes))
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color(hex: "4facfe"), Color(hex: "00f2fe")],
+                colors: [
+                    Color(hex: "4facfe"),
+                    Color(hex: "00f2fe"),
+                    Color(hex: "43e97b")
+                ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
             
-            VStack(spacing: 30) {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 60))
-                    .foregroundColor(.white)
+            // 装饰元素
+            Circle()
+                .fill(Color.white.opacity(0.15))
+                .frame(width: 280, height: 280)
+                .offset(x: -120, y: -100)
+                .blur(radius: 40)
+            
+            VStack(spacing: 32) {
+                // 头部
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title2)
+                    
+                    Text("目标达成")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "target")
+                        .font(.title2)
+                }
+                .foregroundColor(.white)
                 
-                Text("🎯 目标达成!")
-                    .font(.title)
+                Divider()
+                    .background(Color.white.opacity(0.3))
+                
+                // 进度环
+                ZStack {
+                    // 外圈
+                    Circle()
+                        .stroke(Color.white.opacity(0.2), lineWidth: 12)
+                        .frame(width: 180, height: 180)
+                    
+                    // 进度
+                    Circle()
+                        .trim(from: 0, to: progress)
+                        .stroke(
+                            LinearGradient(
+                                colors: [.white, Color(hex: "f5f7fa")],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            ),
+                            style: StrokeStyle(lineWidth: 12, lineCap: .round)
+                        )
+                        .frame(width: 180, height: 180)
+                        .rotationEffect(.degrees(-90))
+                        .shadow(color: Color.white.opacity(0.5), radius: 8, x: 0, y: 0)
+                    
+                    // 中间文字
+                    VStack(spacing: 4) {
+                        Text("\(completedMinutes)")
+                            .font(.system(size: 48, weight: .bold, design: .rounded))
+                        
+                        Text("/ \(goalMinutes)")
+                            .font(.title3)
+                            .foregroundColor(.white.opacity(0.8))
+                        
+                        Text("分钟")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.7))
+                    }
+                    .foregroundColor(.white)
+                }
+                
+                // 进度百分比
+                Text("\(Int(progress * 100))%")
+                    .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 8)
+                    .background(Color.white.opacity(0.2))
+                    .cornerRadius(12)
                 
-                VStack(spacing: 20) {
-                    // 进度显示
-                    HStack {
-                        Text("\(completedMinutes)")
-                            .font(.system(size: 72, weight: .bold))
+                // 完成信息
+                VStack(spacing: 12) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "checkmark.seal.fill")
                             .foregroundColor(.white)
                         
-                        Text("/ \(goalMinutes) 分钟")
-                            .font(.title2)
-                            .foregroundColor(.white.opacity(0.8))
+                        Text("恭喜完成今日目标!")
+                            .font(.headline)
                     }
                     
-                    // 进度条
-                    GeometryReader { geometry in
-                        ZStack(alignment: .leading) {
-                            Rectangle()
-                                .fill(Color.white.opacity(0.2))
-                                .frame(height: 12)
-                                .cornerRadius(6)
-                            
-                            Rectangle()
-                                .fill(Color.white)
-                                .frame(
-                                    width: geometry.size.width * min(1.0, Double(completedMinutes) / Double(goalMinutes)),
-                                    height: 12
-                                )
-                                .cornerRadius(6)
-                        }
-                    }
-                    .frame(height: 12)
-                    
-                    Text("✅ 已完成!")
-                        .font(.headline)
-                        .foregroundColor(.white)
+                    Text("保持专注,继续前行!")
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.9))
                 }
-                .padding()
-                .background(Color.white.opacity(0.15))
-                .cornerRadius(16)
+                .padding(.vertical, 20)
+                .padding(.horizontal, 24)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white.opacity(0.15))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                        )
+                )
                 
                 Spacer()
                 
-                VStack(spacing: 8) {
-                    Text("保持专注,继续前行! 💪")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.9))
+                // 底部
+                VStack(spacing: 12) {
+                    Divider()
+                        .background(Color.white.opacity(0.3))
                     
-                    Text("#FocusFlow #目标达成")
+                    HStack(spacing: 8) {
+                        Image(systemName: "bolt.fill")
+                            .foregroundColor(.yellow)
+                        
+                        Text("FocusFlow - 专注流")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                        
+                        Image(systemName: "bolt.fill")
+                            .foregroundColor(.yellow)
+                    }
+                    .foregroundColor(.white)
+                    
+                    Text("#FocusFlow #目标达成 #自律")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.7))
                 }
             }
-            .padding(30)
+            .padding(32)
         }
     }
 }
 
-// MARK: - 统计项
+// MARK: - 现代统计卡片
+struct StatCardModern: View {
+    let icon: String
+    let iconColor: Color
+    let value: String
+    let label: String
+    let unit: String
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            // 图标
+            ZStack {
+                Circle()
+                    .fill(iconColor.opacity(0.2))
+                    .frame(width: 48, height: 48)
+                
+                Image(systemName: icon)
+                    .font(.title2)
+                    .foregroundColor(iconColor)
+            }
+            
+            // 数值
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
+                Text(value)
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                
+                Text(unit)
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.8))
+            }
+            .foregroundColor(.white)
+            
+            // 标签
+            Text(label)
+                .font(.caption)
+                .foregroundColor(.white.opacity(0.8))
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.25), lineWidth: 1)
+                )
+        )
+    }
+}
+
+// MARK: - 统计项（保留兼容）
 struct StatItem: View {
     let icon: String
     let value: String
