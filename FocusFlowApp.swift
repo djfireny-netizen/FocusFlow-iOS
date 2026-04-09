@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 @main
 struct FocusFlowApp: App {
@@ -34,6 +35,9 @@ struct FocusFlowApp: App {
                     statsManager.loadData()
                     subscriptionManager.checkSubscriptionStatus()
                     
+                    // 更新小组件数据
+                    updateWidgetData()
+                    
                     // 设置计时器与白噪音的联动 - 在App级别确保切换标签页不会停止白噪音
                     setupTimerSoundBinding()
                 }
@@ -56,5 +60,18 @@ struct FocusFlowApp: App {
                 }
             }
         }
+    }
+    
+    // MARK: - 更新小组件数据
+    private func updateWidgetData() {
+        // 使用 App Group 共享数据
+        let sharedDefaults = UserDefaults(suiteName: "group.com.fireny.focusflow2026")
+        
+        // 保存今日专注数据
+        sharedDefaults?.set(statsManager.todayFocusTime / 60, forKey: "widgetFocusTime")
+        sharedDefaults?.set(statsManager.todaySessions, forKey: "widgetFocusSessions")
+        
+        // 刷新小组件
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

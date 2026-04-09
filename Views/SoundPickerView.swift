@@ -31,7 +31,7 @@ struct SoundPickerView: View {
                     Button(L("done")) {
                         dismiss()
                     }
-                    .foregroundColor(Color(hex: "667eea"))
+                    .foregroundColor(AppTheme.accentBlue)
                 }
             }
         }
@@ -47,7 +47,7 @@ struct SoundPickerView: View {
                 Slider(value: $soundManager.volume, in: 0...1) { editing in
                     soundManager.setVolume(soundManager.volume)
                 }
-                .accentColor(Color(hex: "667eea"))
+                .accentColor(AppTheme.accentBlue)
                 
                 Image(systemName: "speaker.wave.3.fill")
                     .foregroundColor(AppTheme.textSecondary)
@@ -76,11 +76,11 @@ struct SoundPickerRow: View {
                 // 图标
                 Image(systemName: soundIcon)
                     .font(.title2)
-                    .foregroundColor(isPlaying ? Color(hex: "667eea") : AppTheme.textSecondary)
+                    .foregroundColor(isPlaying ? AppTheme.accentBlue : AppTheme.textSecondary)
                     .frame(width: 50, height: 50)
                     .background(
                         isPlaying ?
-                        Color(hex: "667eea").opacity(0.2) : AppTheme.backgroundSecondary
+                        AppTheme.accentBlue.opacity(0.2) : AppTheme.backgroundSecondary
                     )
                     .clipShape(Circle())
                 
@@ -93,7 +93,7 @@ struct SoundPickerRow: View {
                     
                     Text(isPlaying ? L("playing") : L("tap_to_play"))
                         .font(.caption)
-                        .foregroundColor(isPlaying ? Color(hex: "667eea") : AppTheme.textTertiary)
+                        .foregroundColor(isPlaying ? AppTheme.accentBlue : AppTheme.textTertiary)
                 }
                 
                 Spacer()
@@ -102,7 +102,7 @@ struct SoundPickerRow: View {
                 if isPlaying {
                     Image(systemName: "pause.circle.fill")
                         .font(.title2)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                 } else {
                     Image(systemName: "play.circle.fill")
                         .font(.title2)
@@ -112,13 +112,13 @@ struct SoundPickerRow: View {
             .padding()
             .background(
                 isPlaying ?
-                Color(hex: "667eea").opacity(0.1) : AppTheme.cardBackground
+                AppTheme.accentBlue.opacity(0.1) : AppTheme.cardBackground
             )
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(
-                        isPlaying ? Color(hex: "667eea") : Color.clear,
+                        isPlaying ? AppTheme.accentBlue : Color.clear,
                         lineWidth: 2
                     )
             )

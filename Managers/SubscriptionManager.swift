@@ -2,7 +2,15 @@ import Foundation
 import SwiftUI
 import StoreKit
 
+// MARK: - 产品 ID
+enum ProductID: String, CaseIterable {
+    case monthly = "focusflow.monthly"
+    case yearly = "focusflow.yearly"
+    case lifetime = "focusflow.lifetime"
+}
+
 // MARK: - 订阅管理器
+@MainActor
 class SubscriptionManager: ObservableObject {
     @Published var isPremium: Bool = false
     @Published var isLoading: Bool = false
@@ -12,17 +20,211 @@ class SubscriptionManager: ObservableObject {
     @Published var trialEndDate: Date?
     @Published var trialDaysRemaining: Int = 0
     
-    // MARK: - 检查订阅状态
-    func checkSubscriptionStatus() {
-        // 检查本地存储的订阅状态
-        isPremium = UserDefaults.standard.bool(forKey: "isPremium")
-        if let typeRaw = UserDefaults.standard.string(forKey: "subscriptionType"),
-           let type = SubscriptionType(rawValue: typeRaw) {
-            subscriptionType = type
+    // StoreKit 产品
+    @Published var products: [Product] = []
+    @Published var purchaseError: String?
+    
+    // 购买事务更新监听
+    private var updates: Task<Void, Never>?
+    
+    init() {
+        // 启动事务监听
+        updates = observeTransactionUpdates()
+        // 检查订阅状态
+        checkSubscriptionStatus()
+        // 获取产品
+        Task {
+            await fetchProducts()
+        }
+    }
+    
+    deinit {
+        updates?.cancel()
+    }
+    
+    // MARK: - 获取产品
+    func fetchProducts() async {
+        await MainActor.run { isLoading = true }
+        
+        do {
+            let productIDs = ProductID.allCases.map { $0.rawValue }
+            let storeProducts = try await Product.products(for: Set(productIDs))
+            
+            await MainActor.run {
+                self.products = storeProducts.sorted { p1, p2 in
+                    // 排序：月度 < 年度 < 终身
+                    let order: [String] = [ProductID.monthly.rawValue, ProductID.yearly.rawValue, ProductID.lifetime.rawValue]
+                    guard let index1 = order.firstIndex(of: p1.id),
+                          let index2 = order.firstIndex(of: p2.id) else { return false }
+                    return index1 < index2
+                }
+            }
+        } catch {
+            print("获取产品失败: \(error)")
+            await MainActor.run {
+                self.purchaseError = "无法加载产品信息"
+            }
         }
         
-        // 检查免费试用
-        checkFreeTrial()
+        await MainActor.run { isLoading = false }
+    }
+    
+    // MARK: - 检查订阅状态
+    func checkSubscriptionStatus() {
+        Task {
+            await updateSubscriptionStatus()
+        }
+    }
+    
+    private func updateSubscriptionStatus() async {
+        var hasActiveSubscription = false
+        var currentType: SubscriptionType = .none
+        
+        // 检查所有产品的事务状态
+        for productID in ProductID.allCases {
+            guard let product = try? await Product.products(for: [productID.rawValue]).first else { continue }
+            
+            if let status = try? await product.subscription?.status {
+                for state in status {
+                    if state.state == .subscribed {
+                        hasActiveSubscription = true
+                        currentType = subscriptionType(from: productID)
+                        break
+                    }
+                }
+            }
+            
+            // 检查非消耗型购买（终身）
+            if productID == .lifetime {
+                if await product.currentEntitlement != nil {
+                    hasActiveSubscription = true
+                    currentType = .lifetime
+                }
+            }
+        }
+        
+        await MainActor.run {
+            self.isPremium = hasActiveSubscription || UserDefaults.standard.bool(forKey: "isPremium")
+            self.subscriptionType = currentType
+        }
+    }
+    
+    private func subscriptionType(from productID: ProductID) -> SubscriptionType {
+        switch productID {
+        case .monthly: return .monthly
+        case .yearly: return .yearly
+        case .lifetime: return .lifetime
+        }
+    }
+    
+    // MARK: - 购买产品
+    func purchase(_ product: Product) async {
+        await MainActor.run { 
+            isLoading = true 
+            purchaseError = nil
+        }
+        
+        do {
+            let result = try await product.purchase()
+            
+            switch result {
+            case .success(let verification):
+                // 验证购买
+                let transaction = try checkVerified(verification)
+                
+                // 完成事务
+                await transaction.finish()
+                
+                // 更新状态
+                await updateSubscriptionStatus()
+                
+                await MainActor.run {
+                    self.isPremium = true
+                    self.subscriptionType = subscriptionType(from: ProductID(rawValue: product.id) ?? .monthly)
+                    self.showSubscriptionSheet = false
+                }
+                
+            case .userCancelled:
+                print("用户取消购买")
+            case .pending:
+                print("购买等待中")
+            @unknown default:
+                print("未知购买结果")
+            }
+        } catch {
+            print("购买失败: \(error)")
+            await MainActor.run {
+                self.purchaseError = "购买失败: \(error.localizedDescription)"
+            }
+        }
+        
+        await MainActor.run { isLoading = false }
+    }
+    
+    // MARK: - 购买订阅（按类型）
+    func purchaseSubscription(_ type: SubscriptionType) async {
+        let productID: String
+        switch type {
+        case .monthly: productID = ProductID.monthly.rawValue
+        case .yearly: productID = ProductID.yearly.rawValue
+        case .lifetime: productID = ProductID.lifetime.rawValue
+        case .none: return
+        }
+        
+        guard let product = products.first(where: { $0.id == productID }) else {
+            await MainActor.run {
+                self.purchaseError = "产品不可用"
+            }
+            return
+        }
+        
+        await purchase(product)
+    }
+    
+    // MARK: - 恢复购买
+    func restorePurchases() async {
+        await MainActor.run { isLoading = true }
+        
+        do {
+            try await AppStore.sync()
+            await updateSubscriptionStatus()
+        } catch {
+            print("恢复失败: \(error)")
+            await MainActor.run {
+                self.purchaseError = "恢复购买失败"
+            }
+        }
+        
+        await MainActor.run { isLoading = false }
+    }
+    
+    // MARK: - 监听事务更新
+    private func observeTransactionUpdates() -> Task<Void, Never> {
+        Task(priority: .background) { [unowned self] in
+            for await verificationResult in Transaction.updates {
+                do {
+                    let transaction = try checkVerified(verificationResult)
+                    
+                    // 完成事务
+                    await transaction.finish()
+                    
+                    // 更新订阅状态
+                    await updateSubscriptionStatus()
+                } catch {
+                    print("事务验证失败: \(error)")
+                }
+            }
+        }
+    }
+    
+    // MARK: - 验证购买
+    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified:
+            throw StoreError.failedVerification
+        case .verified(let safe):
+            return safe
+        }
     }
     
     // MARK: - 免费试用
@@ -55,62 +257,31 @@ class SubscriptionManager: ObservableObject {
         }
     }
     
-    // MARK: - 购买订阅
-    func purchaseSubscription(_ type: SubscriptionType) async {
-        await MainActor.run { isLoading = true }
-        
-        do {
-            // 模拟购买流程(实际项目需要集成 StoreKit 2)
-            try await Task.sleep(nanoseconds: 1_000_000_000)
-            
-            // 购买成功 - 在主线程更新 UI
-            await MainActor.run {
-                isPremium = true
-                subscriptionType = type
-                
-                UserDefaults.standard.set(true, forKey: "isPremium")
-                UserDefaults.standard.set(type.rawValue, forKey: "subscriptionType")
-                
-                showSubscriptionSheet = false
-            }
-        } catch {
-            print("购买失败: \(error)")
-        }
-        
-        await MainActor.run { isLoading = false }
-    }
-    
-    // MARK: - 恢复购买
-    func restorePurchases() async {
-        await MainActor.run { isLoading = true }
-        
-        do {
-            // 模拟恢复流程
-            try await Task.sleep(nanoseconds: 500_000_000)
-            
-            // 恢复成功 - 在主线程更新 UI
-            await MainActor.run {
-                checkSubscriptionStatus()
-            }
-        } catch {
-            print("恢复失败: \(error)")
-        }
-        
-        await MainActor.run { isLoading = false }
-    }
-    
     // MARK: - 取消订阅
     func cancelSubscription() {
-        isPremium = false
-        subscriptionType = .none
-        
-        UserDefaults.standard.set(false, forKey: "isPremium")
-        UserDefaults.standard.removeObject(forKey: "subscriptionType")
+        // 引导用户到系统设置取消订阅
+        if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+            UIApplication.shared.open(url)
+        }
     }
     
     // MARK: - 功能可用性检查
     func canUsePremiumFeature() -> Bool {
         return isPremium
+    }
+}
+
+// MARK: - Store 错误
+enum StoreError: Error {
+    case failedVerification
+}
+
+extension StoreError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .failedVerification:
+            return "购买验证失败"
+        }
     }
 }
 
@@ -124,35 +295,31 @@ enum SubscriptionType: String {
     var displayName: String {
         switch self {
         case .none:
-            return "Free"
+            return L("subscription_free")
         case .monthly:
-            return "Monthly"
+            return L("subscription_monthly")
         case .yearly:
-            return "Yearly"
+            return L("subscription_yearly")
         case .lifetime:
-            return "Lifetime"
+            return L("subscription_lifetime")
         }
     }
     
-    var price: String {
+    var productID: String? {
         switch self {
-        case .monthly:
-            return "$4.99/月"
-        case .yearly:
-            return "$29.99/年"
-        case .lifetime:
-            return "$59.99"
-        case .none:
-            return ""
+        case .monthly: return ProductID.monthly.rawValue
+        case .yearly: return ProductID.yearly.rawValue
+        case .lifetime: return ProductID.lifetime.rawValue
+        case .none: return nil
         }
     }
     
     var savings: String? {
         switch self {
         case .yearly:
-            return "Save 50%"
+            return L("subscription_save_50")
         case .lifetime:
-            return "Best Value"
+            return L("subscription_best_value")
         default:
             return nil
         }
@@ -167,12 +334,14 @@ struct PremiumFeature {
 }
 
 struct PremiumFeatures {
-    static let allFeatures: [PremiumFeature] = [
-        PremiumFeature(icon: "timer", title: "自定义时长", description: "自由设置专注和休息时间"),
-        PremiumFeature(icon: "chart.bar.fill", title: "详细统计", description: "查看完整的数据分析和趋势"),
-        PremiumFeature(icon: "waveform", title: "白噪音库", description: "解锁所有高品质白噪音"),
-        PremiumFeature(icon: "tag.fill", title: "分类标签", description: "为专注时间添加分类标签"),
-        PremiumFeature(icon: "icloud.fill", title: "iCloud 同步", description: "多设备数据自动同步"),
-        PremiumFeature(icon: "widget.family.medium", title: "桌面组件", description: "精美的桌面小组件")
-    ]
+    static var allFeatures: [PremiumFeature] {
+        [
+            PremiumFeature(icon: "timer", title: L("feature_custom_duration"), description: L("feature_custom_duration_desc")),
+            PremiumFeature(icon: "chart.bar.fill", title: L("feature_detailed_stats"), description: L("feature_detailed_stats_desc")),
+            PremiumFeature(icon: "waveform", title: L("feature_white_noise"), description: L("feature_white_noise_desc")),
+            PremiumFeature(icon: "tag.fill", title: L("feature_category_tags"), description: L("feature_category_tags_desc")),
+            PremiumFeature(icon: "icloud.fill", title: L("feature_icloud_sync"), description: L("feature_icloud_sync_desc")),
+            PremiumFeature(icon: "chart.line.uptrend.xyaxis", title: L("feature_widgets"), description: L("feature_widgets_desc"))
+        ]
+    }
 }

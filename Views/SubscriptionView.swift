@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 // MARK: - 订阅页面
 struct SubscriptionView: View {
@@ -9,8 +10,31 @@ struct SubscriptionView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                // 深色背景
                 AppTheme.backgroundPrimary
                     .ignoresSafeArea()
+                
+                // 渐变球体背景
+                AppTheme.gradientOrb(size: 450)
+                    .position(x: UIScreen.main.bounds.width / 2, y: 300)
+                
+                // 装饰细线
+                GeometryReader { geometry in
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: geometry.size.height * 0.2))
+                        path.addQuadCurve(to: CGPoint(x: geometry.size.width, y: geometry.size.height * 0.4),
+                                         control: CGPoint(x: geometry.size.width * 0.5, y: geometry.size.height * 0.1))
+                    }
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                    
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: geometry.size.height * 0.7))
+                        path.addQuadCurve(to: CGPoint(x: geometry.size.width, y: geometry.size.height * 0.8),
+                                         control: CGPoint(x: geometry.size.width * 0.5, y: geometry.size.height * 0.9))
+                    }
+                    .stroke(Color.white.opacity(0.05), lineWidth: 1)
+                }
+                .ignoresSafeArea()
                 
                 ScrollView {
                     VStack(spacing: 30) {
@@ -28,11 +52,8 @@ struct SubscriptionView: View {
                         // 价格方案
                         pricingSection
                         
-                        // 购买按钮
+                        // 购买按钮（包含恢复购买）
                         purchaseButton
-                        
-                        // 恢复购买
-                        restoreButton
                         
                         // 条款
                         termsText
@@ -41,14 +62,14 @@ struct SubscriptionView: View {
                     .padding(.top, 20)
                 }
             }
-            .navigationTitle("升级 Premium")
+            .navigationTitle(L("upgrade_premium"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("关闭") {
+                    Button(L("close")) {
                         dismiss()
                     }
-                    .foregroundColor(Color(hex: "667eea"))
+                    .foregroundColor(AppTheme.accentOrange)
                 }
             }
         }
@@ -82,11 +103,11 @@ struct SubscriptionView: View {
                     .foregroundColor(.white)
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("🎉 限时免费试用 7 天")
+                    Text(L("free_trial_7_days"))
                         .font(.headline)
                         .foregroundColor(.white)
                     
-                    Text("无需付费，立即体验所有高级功能")
+                    Text(L("free_trial_description"))
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.9))
                 }
@@ -96,11 +117,7 @@ struct SubscriptionView: View {
         }
         .padding()
         .background(
-            LinearGradient(
-                colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
+            AppTheme.primaryGradient
         )
         .cornerRadius(16)
     }
@@ -112,7 +129,7 @@ struct SubscriptionView: View {
                 HStack(spacing: 12) {
                     Image(systemName: feature.icon)
                         .font(.title2)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                         .frame(width: 40)
                     
                     VStack(alignment: .leading, spacing: 4) {
@@ -138,7 +155,7 @@ struct SubscriptionView: View {
     // MARK: - 价格方案
     private var pricingSection: some View {
         VStack(spacing: 12) {
-            Text("选择方案")
+            Text(L("select_plan"))
                 .font(.headline)
                 .foregroundColor(AppTheme.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -172,96 +189,82 @@ struct SubscriptionView: View {
     // MARK: - 购买按钮
     private var purchaseButton: some View {
         VStack(spacing: 12) {
-            if !subscriptionManager.isFreeTrial {
-                // 免费试用按钮
-                Button(action: {
-                    subscriptionManager.startFreeTrial()
-                }) {
-                    HStack {
-                        Image(systemName: "gift.fill")
-                        Text("开始 7 天免费试用")
+            // 购买按钮
+            Button(action: {
+                Task {
+                    // 获取选中的产品
+                    guard let productID = selectedPlan.productID,
+                          let product = subscriptionManager.products.first(where: { $0.id == productID }) else {
+                        return
+                    }
+                    await subscriptionManager.purchase(product)
+                }
+            }) {
+                HStack {
+                    if subscriptionManager.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    } else {
+                        Text(selectedPlan == .lifetime ? L("purchase_lifetime") : L("subscribe_now"))
                             .font(.headline)
                             .foregroundColor(.white)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        LinearGradient(
-                            colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .cornerRadius(16)
-                    .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 10, y: 5)
                 }
-                
-                Text("试用结束后，将自动以 $4.99/月 续费，可随时取消")
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(AppTheme.primaryGradient)
+                .cornerRadius(16)
+            }
+            .disabled(subscriptionManager.isLoading || subscriptionManager.products.isEmpty)
+            
+            // 错误提示
+            if let error = subscriptionManager.purchaseError {
+                Text(error)
                     .font(.caption)
-                    .foregroundColor(AppTheme.textTertiary)
+                    .foregroundColor(.red)
                     .multilineTextAlignment(.center)
-            } else {
-                // 已试用，显示正常购买
-                Button(action: {
-                    Task {
-                        await subscriptionManager.purchaseSubscription(selectedPlan)
-                    }
-                }) {
-                    HStack {
-                        if subscriptionManager.isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        } else {
-                            Text("立即订阅")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(AppTheme.primaryGradient)
-                    .cornerRadius(16)
+            }
+            
+            // 恢复购买
+            Button(action: {
+                Task {
+                    await subscriptionManager.restorePurchases()
                 }
-                .disabled(subscriptionManager.isLoading)
+            }) {
+                Text(L("restore_purchases"))
+                    .font(.subheadline)
+                    .foregroundColor(AppTheme.accentBlue)
             }
-        }
-    }
-    
-    // MARK: - 恢复购买
-    private var restoreButton: some View {
-        Button(action: {
-            Task {
-                await subscriptionManager.restorePurchases()
-            }
-        }) {
-            Text("恢复购买")
-                .font(.subheadline)
-                .foregroundColor(Color(hex: "667eea"))
+            .disabled(subscriptionManager.isLoading)
         }
     }
     
     // MARK: - 条款
     private var termsText: some View {
         VStack(spacing: 8) {
-            Text("订阅将自动续期,可随时在设置中取消")
+            Text(L("subscription_auto_renew"))
                 .font(.caption)
                 .foregroundColor(AppTheme.textTertiary)
             
             HStack(spacing: 12) {
-                Button("使用条款") {
-                    // 打开条款
+                Button(L("terms_of_service")) {
+                    if let url = URL(string: "https://djfireny-netizen.github.io/focusflow-support/TERMS_OF_SERVICE.md") {
+                        UIApplication.shared.open(url)
+                    }
                 }
                 .font(.caption)
-                .foregroundColor(Color(hex: "667eea"))
+                .foregroundColor(AppTheme.accentBlue)
                 
                 Text("•")
                     .foregroundColor(AppTheme.textTertiary)
                 
-                Button("隐私政策") {
-                    // 打开隐私政策
+                Button(L("privacy_policy")) {
+                    if let url = URL(string: "https://djfireny-netizen.github.io/focusflow-support/PRIVACY_POLICY.md") {
+                        UIApplication.shared.open(url)
+                    }
                 }
                 .font(.caption)
-                .foregroundColor(Color(hex: "667eea"))
+                .foregroundColor(AppTheme.accentBlue)
             }
         }
     }
@@ -269,9 +272,22 @@ struct SubscriptionView: View {
 
 // MARK: - 方案卡片
 struct PlanCard: View {
+    @EnvironmentObject var subscriptionManager: SubscriptionManager
     let type: SubscriptionType
     let isSelected: Bool
     let action: () -> Void
+    
+    var product: Product? {
+        guard let productID = type.productID else { return nil }
+        return subscriptionManager.products.first { $0.id == productID }
+    }
+    
+    var displayPrice: String {
+        guard let product = product else { 
+            return type == .monthly ? "$2.99" : type == .yearly ? "$19.99" : "$49.99"
+        }
+        return product.displayPrice
+    }
     
     var body: some View {
         Button(action: action) {
@@ -295,32 +311,33 @@ struct PlanCard: View {
                         }
                     }
                     
-                    Text(type.price)
+                    Text(displayPrice)
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                 }
                 
                 Spacer()
                 
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
-                    .foregroundColor(isSelected ? Color(hex: "667eea") : AppTheme.textTertiary)
+                    .foregroundColor(isSelected ? AppTheme.accentBlue : AppTheme.textTertiary)
             }
             .padding()
             .background(
                 isSelected ?
-                Color(hex: "667eea").opacity(0.1) : AppTheme.backgroundSecondary
+                AppTheme.accentBlue.opacity(0.1) : AppTheme.backgroundSecondary
             )
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(
-                        isSelected ? Color(hex: "667eea") : Color.clear,
+                        isSelected ? AppTheme.accentBlue : Color.clear,
                         lineWidth: 2
                     )
             )
         }
+        .disabled(product == nil && !subscriptionManager.products.isEmpty)
     }
 }
 

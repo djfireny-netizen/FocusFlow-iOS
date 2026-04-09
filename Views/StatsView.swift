@@ -12,6 +12,21 @@ struct StatsView: View {
             AppTheme.backgroundPrimary
                 .ignoresSafeArea()
             
+            // 渐变球体背景
+            AppTheme.gradientOrb(size: 350)
+                .position(x: UIScreen.main.bounds.width * 0.3, y: 200)
+            
+            // 装饰细线
+            GeometryReader { geometry in
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: geometry.size.height * 0.25))
+                    path.addQuadCurve(to: CGPoint(x: geometry.size.width, y: geometry.size.height * 0.35),
+                                     control: CGPoint(x: geometry.size.width * 0.5, y: geometry.size.height * 0.15))
+                }
+                .stroke(Color.white.opacity(0.08), lineWidth: 1)
+            }
+            .ignoresSafeArea()
+            
             ScrollView {
                 VStack(spacing: 20) {
                     // 标题
@@ -34,7 +49,7 @@ struct StatsView: View {
                         }) {
                             Image(systemName: "square.and.arrow.up")
                                 .font(.title2)
-                                .foregroundColor(Color(hex: "667eea"))
+                                .foregroundColor(AppTheme.accentBlue)
                         }
                     }
                     .padding(.horizontal, 20)

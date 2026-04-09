@@ -31,27 +31,34 @@ struct FocusLiveActivityView: View {
     
     var body: some View {
         ZStack {
-            // 背景渐变
-            if context.attributes.isBreak {
-                LinearGradient(
-                    colors: [Color(hex: "4facfe"), Color(hex: "00f2fe")],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            } else {
-                LinearGradient(
-                    colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            }
+            // 深色背景
+            Color(hex: "0a0a0a")
             
-            VStack(spacing: 12) {
+            // 渐变球体背景
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            context.attributes.isBreak ? Color(hex: "4facfe") : Color(hex: "ff6b35"),
+                            context.attributes.isBreak ? Color(hex: "00f2fe") : Color(hex: "4facfe"),
+                            Color.clear
+                        ],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: 300
+                    )
+                )
+                .frame(width: 600, height: 600)
+                .offset(y: -50)
+                .blur(radius: 80)
+                .opacity(0.5)
+            
+            VStack(spacing: 16) {
                 // 顶部信息
                 HStack {
                     // 分类图标
                     Image(systemName: context.attributes.isBreak ? "cup.and.saucer.fill" : "brain.head.profile")
-                        .font(.title2)
+                        .font(.title3)
                     
                     Text(context.attributes.isBreak ? "休息时间" : context.attributes.focusCategory)
                         .font(.headline)
@@ -77,34 +84,75 @@ struct FocusLiveActivityView: View {
                 }
                 .foregroundColor(.white)
                 .padding(.horizontal, 20)
+                .padding(.top, 8)
                 
                 // 进度条
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 4)
-                            .fill(Color.white.opacity(0.2))
-                            .frame(height: 8)
+                            .fill(Color.white.opacity(0.1))
+                            .frame(height: 6)
                         
                         RoundedRectangle(cornerRadius: 4)
-                            .fill(Color.white)
-                            .frame(width: geometry.size.width * context.state.progress, height: 8)
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color(hex: "ff6b35"), Color(hex: "4facfe")],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .frame(width: geometry.size.width * context.state.progress, height: 6)
                     }
                 }
-                .frame(height: 8)
+                .frame(height: 6)
                 .padding(.horizontal, 20)
                 
                 // 倒计时
-                HStack {
-                    Spacer()
-                    
-                    Text(formattedTime(context.state.timeRemaining))
-                        .font(.system(size: 48, weight: .bold, design: .rounded))
+                Text(formattedTime(context.state.timeRemaining))
+                    .font(.system(size: 56, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                
+                // 操作按钮
+                HStack(spacing: 20) {
+                    // 停止按钮
+                    Button(action: {
+                        // TODO: 调用停止方法
+                    }) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "stop.fill")
+                                .font(.title3)
+                            Text("停止")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
                         .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(Color.red.opacity(0.8))
+                        .cornerRadius(12)
+                    }
                     
-                    Spacer()
+                    // 暂停/继续按钮
+                    Button(action: {
+                        // TODO: 调用暂停/继续方法
+                    }) {
+                        HStack(spacing: 6) {
+                            Image(systemName: context.state.isPaused ? "play.fill" : "pause.fill")
+                                .font(.title3)
+                            Text(context.state.isPaused ? "继续" : "暂停")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(Color.white.opacity(0.2))
+                        .cornerRadius(12)
+                    }
                 }
+                .padding(.top, 4)
             }
-            .padding(.vertical, 16)
+            .padding(.vertical, 20)
         }
     }
     
@@ -123,59 +171,78 @@ struct FocusIslandView: View {
     var body: some View {
         if isCompact {
             // 紧凑视图
-            HStack(spacing: 8) {
-                Image(systemName: context.attributes.isBreak ? "cup.and.saucer.fill" : "brain.head.profile")
-                    .font(.title3)
+            HStack(spacing: 6) {
+                // 状态指示点
+                Circle()
+                    .fill(context.attributes.isBreak ? Color(hex: "4facfe") : Color(hex: "ff6b35"))
+                    .frame(width: 6, height: 6)
                 
                 Text(formattedTime(context.state.timeRemaining))
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
                 
                 if context.state.isPaused {
                     Image(systemName: "pause.fill")
-                        .font(.caption)
+                        .font(.caption2)
+                        .foregroundColor(Color(hex: "ff6b35"))
                 }
             }
             .foregroundColor(.white)
         } else {
             // 展开视图
             HStack(spacing: 12) {
-                // 左侧图标
+                // 左侧图标 - 渐变背景
                 ZStack {
                     Circle()
-                        .fill(Color.white.opacity(0.2))
-                        .frame(width: 44, height: 44)
+                        .fill(
+                            LinearGradient(
+                                colors: [
+                                    context.attributes.isBreak ? Color(hex: "4facfe") : Color(hex: "ff6b35"),
+                                    context.attributes.isBreak ? Color(hex: "00f2fe") : Color(hex: "4facfe")
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: 40, height: 40)
                     
                     Image(systemName: context.attributes.isBreak ? "cup.and.saucer.fill" : "brain.head.profile")
                         .font(.title3)
                         .foregroundColor(.white)
                 }
                 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(context.attributes.isBreak ? "休息一下" : context.attributes.focusCategory)
-                        .font(.headline)
-                        .foregroundColor(.white)
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.8))
                     
                     Text(formattedTime(context.state.timeRemaining))
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                 }
                 
                 Spacer()
                 
-                // 进度环
+                // 进度环 - 蓝橙渐变
                 ZStack {
                     Circle()
-                        .stroke(Color.white.opacity(0.2), lineWidth: 3)
+                        .stroke(Color.white.opacity(0.1), lineWidth: 2.5)
                     
                     Circle()
                         .trim(from: 0, to: context.state.progress)
-                        .stroke(Color.white, style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                        .stroke(
+                            LinearGradient(
+                                colors: [Color(hex: "ff6b35"), Color(hex: "4facfe")],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            style: StrokeStyle(lineWidth: 2.5, lineCap: .round)
+                        )
                         .rotationEffect(.degrees(-90))
                 }
-                .frame(width: 36, height: 36)
+                .frame(width: 32, height: 32)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
         }
     }
     
@@ -211,9 +278,10 @@ struct FocusFlowLiveActivityLiveActivity: Widget {
                     EmptyView()
                 }
             } compactLeading: {
-                // 紧凑前视图
+                // 紧凑前视图 - 图标
                 Image(systemName: context.attributes.isBreak ? "cup.and.saucer.fill" : "brain.head.profile")
-                    .foregroundColor(context.attributes.isBreak ? .cyan : .purple)
+                    .font(.caption)
+                    .foregroundColor(context.attributes.isBreak ? Color(hex: "4facfe") : Color(hex: "ff6b35"))
             } compactTrailing: {
                 // 紧凑后视图
                 Text(formattedTimeCompact(context.state.timeRemaining))

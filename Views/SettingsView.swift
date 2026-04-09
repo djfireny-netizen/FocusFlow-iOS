@@ -17,6 +17,7 @@ struct SettingsView: View {
     @State private var showFocusDurationPicker: Bool = false
     @State private var showBreakDurationPicker: Bool = false
     @State private var showLanguagePicker = false
+    @State private var showThemePicker = false
     
     var body: some View {
         ZStack {
@@ -113,14 +114,7 @@ struct SettingsView: View {
         }
         .padding()
         .background(
-            LinearGradient(
-                colors: [
-                    Color(hex: "667eea").opacity(0.2),
-                    Color(hex: "764ba2").opacity(0.2)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            AppTheme.cardBackground
         )
         .cornerRadius(16)
         .padding(.horizontal, 20)
@@ -141,7 +135,7 @@ struct SettingsView: View {
                     HStack {
                         HStack {
                             Image(systemName: "timer")
-                                .foregroundColor(Color(hex: "667eea"))
+                                .foregroundColor(AppTheme.accentBlue)
                                 .frame(width: 30)
                             
                             Text(L("focus_duration"))
@@ -170,7 +164,7 @@ struct SettingsView: View {
                     HStack {
                         HStack {
                             Image(systemName: "cup.and.saucer.fill")
-                                .foregroundColor(Color(hex: "764ba2"))
+                                .foregroundColor(AppTheme.accentOrange)
                                 .frame(width: 30)
                             
                             Text(L("break_duration"))
@@ -227,15 +221,15 @@ struct SettingsView: View {
                 Text("\(dailyGoalMinutes) " + L("minutes_plain"))
                     .font(.subheadline)
                     .fontWeight(.bold)
-                    .foregroundColor(Color(hex: "667eea"))
+                    .foregroundColor(AppTheme.accentBlue)
             }
             
             VStack(spacing: 16) {
                 // 目标滑块
-                VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Image(systemName: "target")
-                            .foregroundColor(Color(hex: "667eea"))
+                            .foregroundColor(AppTheme.accentBlue)
                         Text(L("target_duration"))
                             .foregroundColor(AppTheme.textPrimary)
                         Spacer()
@@ -252,7 +246,7 @@ struct SettingsView: View {
                         in: 30...480,
                         step: 30
                     )
-                    .tint(Color(hex: "667eea"))
+                    .tint(AppTheme.accentBlue)
                     
                     HStack {
                         Text("30" + L("minutes_plain"))
@@ -269,7 +263,7 @@ struct SettingsView: View {
                 HStack {
                     Image(systemName: "info.circle.fill")
                         .font(.caption)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                     Text(L("daily_goal_tip", dailyGoalMinutes))
                         .font(.caption)
                         .foregroundColor(AppTheme.textSecondary)
@@ -333,7 +327,7 @@ struct SettingsView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
-                                .background(Color(hex: "667eea"))
+                                .background(AppTheme.accentBlue)
                                 .cornerRadius(8)
                         }
                         .disabled(isSyncingHealth)
@@ -347,7 +341,7 @@ struct SettingsView: View {
                 HStack {
                     Image(systemName: "info.circle.fill")
                         .font(.caption)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                     
                     Text(healthManager.isHealthEnabled ? L("health_synced") : L("health_auth_desc"))
                         .font(.caption)
@@ -374,7 +368,7 @@ struct SettingsView: View {
                 HStack {
                     HStack {
                         Image(systemName: "bell.fill")
-                            .foregroundColor(Color(hex: "667eea"))
+                            .foregroundColor(AppTheme.accentBlue)
                             .frame(width: 30)
                         
                         Text(L("daily_reminder"))
@@ -489,6 +483,29 @@ struct SettingsView: View {
                     .padding()
                 }
                 
+                // 主题选择（Premium 功能）
+                Button(action: {
+                    showThemePicker = true
+                }) {
+                    HStack {
+                        Text("主题背景")
+                            .foregroundColor(AppTheme.textPrimary)
+                        
+                        Spacer()
+                        
+                        if !subscriptionManager.isPremium {
+                            Image(systemName: "lock.fill")
+                                .font(.caption)
+                                .foregroundColor(AppTheme.accentOrange)
+                        }
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(AppTheme.textTertiary)
+                    }
+                    .padding()
+                }
+                
                 Divider()
                     .padding(.leading, 50)
                 
@@ -525,6 +542,9 @@ struct SettingsView: View {
         .padding(.horizontal, 20)
         .sheet(isPresented: $showLanguagePicker) {
             LanguagePickerView()
+        }
+        .sheet(isPresented: $showThemePicker) {
+            ThemePickerView()
         }
         // 语言切换时强制刷新
         .id(languageManager.currentLanguage)
@@ -571,7 +591,7 @@ struct SettingRow: View {
         Button(action: action) {
             HStack {
                 Image(systemName: icon)
-                    .foregroundColor(Color(hex: "667eea"))
+                    .foregroundColor(AppTheme.accentBlue)
                     .frame(width: 30)
                 
                 Text(title)
@@ -752,7 +772,7 @@ struct LanguagePickerView: View {
                     Button(L("cancel")) {
                         dismiss()
                     }
-                    .foregroundColor(Color(hex: "667eea"))
+                    .foregroundColor(AppTheme.accentBlue)
                 }
             }
         }
@@ -777,7 +797,7 @@ struct LanguageOptionButton: View {
                 // 语言图标
                 ZStack {
                     Circle()
-                        .fill(isSelected ? Color(hex: "667eea") : Color.gray.opacity(0.15))
+                        .fill(isSelected ? AppTheme.accentBlue : Color.gray.opacity(0.15))
                         .frame(width: 44, height: 44)
                     
                     Text(langIcon)
@@ -805,7 +825,7 @@ struct LanguageOptionButton: View {
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.title3)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                 }
             }
             .padding()
@@ -815,7 +835,7 @@ struct LanguageOptionButton: View {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(isSelected ? Color(hex: "667eea").opacity(0.5) : Color.clear, lineWidth: 2)
+                    .stroke(isSelected ? AppTheme.accentBlue.opacity(0.5) : Color.clear, lineWidth: 2)
             )
         }
         .buttonStyle(PlainButtonStyle())
@@ -827,7 +847,9 @@ struct LanguageOptionButton: View {
         switch lang.code {
         case "auto": return "🌐"
         case "zh": return "🇨🇳"
+        case "zh-Hant": return "🇨🇳"
         case "en": return "🇬🇧"
+        case "ja": return "🇯🇵"
         default: return "🌐"
         }
     }
@@ -847,4 +869,156 @@ struct LanguageOptionButton: View {
     SettingsView()
         .environmentObject(TimerManager())
         .environmentObject(SubscriptionManager())
+}
+
+// MARK: - 主题选择器
+struct ThemePickerView: View {
+    @Environment(\.dismiss) var dismiss
+    @StateObject private var themeManager = ThemeManager.shared
+    @StateObject private var subscriptionManager = SubscriptionManager.shared
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                AppTheme.backgroundPrimary
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(spacing: 16) {
+                        // 主题网格
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
+                            ForEach(ThemeType.allCases) { theme in
+                                ThemeCard(
+                                    theme: theme,
+                                    isUnlocked: subscriptionManager.isPremium || theme == .default,
+                                    isSelected: themeManager.currentTheme == theme
+                                )
+                                .onTapGesture {
+                                    if subscriptionManager.isPremium || theme == .default {
+                                        withAnimation(.spring(response: 0.3)) {
+                                            themeManager.saveTheme(theme)
+                                        }
+                                    } else {
+                                        // 提示升级
+                                        showUpgradeAlert()
+                                    }
+                                }
+                            }
+                        }
+                        .padding()
+                        
+                        // 自动切换开关
+                        if subscriptionManager.isPremium {
+                            VStack(spacing: 12) {
+                                HStack {
+                                    Text("自动切换主题")
+                                        .font(.body)
+                                        .foregroundColor(AppTheme.textPrimary)
+                                    
+                                    Spacer()
+                                    
+                                    Toggle("", isOn: Binding(
+                                        get: { themeManager.autoSwitch },
+                                        set: { themeManager.saveAutoSwitch($0) }
+                                    ))
+                                    .labelsHidden()
+                                }
+                                
+                                Text("根据白噪音自动切换主题背景")
+                                    .font(.caption)
+                                    .foregroundColor(AppTheme.textSecondary)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .padding()
+                            .background(AppTheme.cardBackground)
+                            .cornerRadius(12)
+                            .padding(.horizontal)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("主题背景")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(L("done")) {
+                        dismiss()
+                    }
+                    .foregroundColor(AppTheme.accentBlue)
+                }
+            }
+        }
+    }
+    
+    private func showUpgradeAlert() {
+        // TODO: 显示升级弹窗
+        print("需要升级到 Premium")
+    }
+}
+
+// MARK: - 主题卡片
+struct ThemeCard: View {
+    let theme: ThemeType
+    let isUnlocked: Bool
+    let isSelected: Bool
+    
+    var body: some View {
+        ZStack {
+            // 主题预览
+            LinearGradient(
+                colors: theme.colors,
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .frame(height: 120)
+            .cornerRadius(12)
+            
+            VStack {
+                // 主题图标
+                Image(systemName: theme.icon)
+                    .font(.title)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                // 主题名称
+                Text(theme.rawValue)
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 8)
+                    .background(Color.black.opacity(0.3))
+                    .cornerRadius(6)
+            }
+            .padding()
+            
+            // 锁图标（未解锁时显示）
+            if !isUnlocked {
+                Image(systemName: "lock.fill")
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.4))
+                    .cornerRadius(12)
+            }
+            
+            // 选中标记
+            if isSelected {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(4)
+                    }
+                    Spacer()
+                }
+            }
+        }
+        .scaleEffect(isSelected ? 1.05 : 1.0)
+        .shadow(color: isSelected ? AppTheme.accentBlue.opacity(0.5) : .clear, radius: 10)
+        .animation(.spring(response: 0.3), value: isSelected)
+    }
 }

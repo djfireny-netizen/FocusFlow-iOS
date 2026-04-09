@@ -11,19 +11,19 @@ struct LaunchScreenView: View {
             ContentView()
         } else {
             ZStack {
-                // 背景渐变
-                LinearGradient(
-                    colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .ignoresSafeArea()
+                // 深色背景
+                AppTheme.backgroundPrimary
+                    .ignoresSafeArea()
+                
+                // 渐变球体背景
+                AppTheme.gradientOrb(size: 400)
+                    .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
                 
                 VStack(spacing: 24) {
                     // Logo 图标
                     ZStack {
                         Circle()
-                            .fill(Color.white.opacity(0.2))
+                            .fill(Color.white.opacity(0.1))
                             .frame(width: 120, height: 120)
                         
                         Image(systemName: "timer")
@@ -40,11 +40,11 @@ struct LaunchScreenView: View {
                     // 标语
                     Text(L("stay_focused"))
                         .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.8))
+                        .foregroundColor(.white.opacity(0.6))
                     
                     // 加载指示器
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "ff6b35")))
                         .scaleEffect(1.2)
                         .padding(.top, 40)
                 }
@@ -107,7 +107,7 @@ struct ContentView: View {
                 }
                 .tag(3)
         }
-        .accentColor(Color(hex: "667eea"))
+        .accentColor(AppTheme.accentOrange)
         // 语言切换时强制刷新
         .id(languageManager.currentLanguage)
     }
@@ -146,11 +146,7 @@ struct FullScreenFocusView: View {
                     Circle()
                         .trim(from: 0, to: timerManager.progress)
                         .stroke(
-                            LinearGradient(
-                                colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
+                            AppTheme.primaryGradient,
                             style: StrokeStyle(lineWidth: 8, lineCap: .round)
                         )
                         .rotationEffect(.degrees(-90))

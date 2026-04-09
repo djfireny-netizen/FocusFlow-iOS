@@ -7,6 +7,7 @@ struct TimerView: View {
     @EnvironmentObject var timerManager: TimerManager
     @EnvironmentObject var soundManager: SoundManager
     @EnvironmentObject var subscriptionManager: SubscriptionManager
+    @StateObject private var themeManager = ThemeManager.shared
     @State private var showSoundPicker: Bool = false
     @State private var showFullScreen: Bool = false
     @State private var lockScreenSetup = false
@@ -15,8 +16,8 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            // 背景渐变
-            AppTheme.backgroundPrimary
+            // 主题背景（替代原固定背景）
+            ThemeBackgroundView()
                 .ignoresSafeArea()
             
             ScrollView {
@@ -152,11 +153,7 @@ struct TimerView: View {
             Circle()
                 .trim(from: 0, to: timerManager.progress)
                 .stroke(
-                    LinearGradient(
-                        colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
+                    AppTheme.primaryGradient,
                     style: StrokeStyle(lineWidth: 12, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
@@ -227,7 +224,7 @@ struct TimerView: View {
                 }
             } else {
                 // 专注模式:显示三个按钮
-                HStack(spacing: 30) {
+                HStack(spacing: 24) {
                     // 停止按钮
                     if timerManager.timerState != .idle {
                         Button(action: {
@@ -236,9 +233,9 @@ struct TimerView: View {
                         }) {
                             Image(systemName: "stop.fill")
                                 .font(.title2)
-                                .foregroundColor(.white)
-                                .frame(width: 60, height: 60)
-                                .background(AppTheme.error)
+                                .foregroundColor(AppTheme.error)
+                                .frame(width: 56, height: 56)
+                                .background(AppTheme.error.opacity(0.15))
                                 .clipShape(Circle())
                         }
                     }
@@ -266,7 +263,7 @@ struct TimerView: View {
                             .frame(width: 80, height: 80)
                             .background(AppTheme.primaryGradient)
                             .clipShape(Circle())
-                            .shadow(color: Color(hex: "667eea").opacity(0.5), radius: 15, y: 5)
+                            .shadow(color: AppTheme.accentOrange.opacity(0.4), radius: 15, y: 5)
                     }
                     
                     // 跳到休息
@@ -277,9 +274,9 @@ struct TimerView: View {
                         }) {
                             Image(systemName: "forward.fill")
                                 .font(.title2)
-                                .foregroundColor(.white)
-                                .frame(width: 60, height: 60)
-                                .background(AppTheme.accentBlue)
+                                .foregroundColor(AppTheme.accentBlue)
+                                .frame(width: 56, height: 56)
+                                .background(AppTheme.accentBlue.opacity(0.15))
                                 .clipShape(Circle())
                         }
                     }
@@ -341,7 +338,7 @@ struct TimerView: View {
                 }) {
                     Text(L("view_all"))
                         .font(.subheadline)
-                        .foregroundColor(Color(hex: "667eea"))
+                        .foregroundColor(AppTheme.accentBlue)
                 }
             }
             
@@ -396,10 +393,10 @@ struct SoundCard: View {
             VStack(spacing: 8) {
                 Image(systemName: soundIcon)
                     .font(.title2)
-                    .foregroundColor(isPlaying ? Color(hex: "667eea") : AppTheme.textSecondary)
+                    .foregroundColor(isPlaying ? AppTheme.accentBlue : AppTheme.textSecondary)
                     .frame(width: 50, height: 50)
                     .background(
-                        isPlaying ? Color(hex: "667eea").opacity(0.2) : AppTheme.backgroundSecondary
+                        isPlaying ? AppTheme.accentBlue.opacity(0.2) : AppTheme.backgroundSecondary
                     )
                     .clipShape(Circle())
                 
@@ -409,7 +406,7 @@ struct SoundCard: View {
             }
         }
         .padding()
-        .background(AppTheme.backgroundSecondary)
+        .background(AppTheme.cardBackground)
         .cornerRadius(12)
     }
     

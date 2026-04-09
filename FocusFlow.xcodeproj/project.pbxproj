@@ -23,9 +23,13 @@
 		1014 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014 /* AppConstants.swift */; };
 		1015 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2015 /* Theme.swift */; };
 		1016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2016 /* Assets.xcassets */; };
+		A26EE98F2F869F0F00E36E96 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27E2B712F853AAB00B1721A /* WidgetKit.framework */; };
+		A26EE9902F869F0F00E36E96 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27E2B732F853AAB00B1721A /* SwiftUI.framework */; };
+		A26EE99F2F869F1000E36E96 /* FocusWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A26EE98E2F869F0F00E36E96 /* FocusWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A27E2B722F853AAB00B1721A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27E2B712F853AAB00B1721A /* WidgetKit.framework */; };
 		A27E2B742F853AAB00B1721A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27E2B732F853AAB00B1721A /* SwiftUI.framework */; };
 		A27E2B852F853AAD00B1721A /* FocusFlowLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A27E2B702F853AAB00B1721A /* FocusFlowLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A281640E2F87F72B00BCF738 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281640D2F87F72B00BCF738 /* ThemeManager.swift */; };
 		A2E700872F8405D4001D889B /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700842F8405D4001D889B /* rain.mp3 */; };
 		A2E700882F8405D4001D889B /* ocean.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700832F8405D4001D889B /* ocean.mp3 */; };
 		A2E700892F8405D4001D889B /* forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700822F8405D4001D889B /* forest.mp3 */; };
@@ -33,6 +37,7 @@
 		A2E7008B2F8405D4001D889B /* cafe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700802F8405D4001D889B /* cafe.mp3 */; };
 		A2E7008C2F8405D4001D889B /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700852F8405D4001D889B /* wind.mp3 */; };
 		A2F4AC772F848564001E0EEB /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F4AC762F848564001E0EEB /* HealthKit.framework */; };
+		A2F4AC792F848564001E0EEC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F4AC782F848564001E0EEC /* StoreKit.framework */; };
 		A2FF0001 /* LockScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF1001 /* LockScreenManager.swift */; };
 		A2FF0002 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF1002 /* NotificationManager.swift */; };
 		A2FF0003 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF1003 /* ShareManager.swift */; };
@@ -41,6 +46,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A26EE99D2F869F1000E36E96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A26EE98D2F869F0F00E36E96;
+			remoteInfo = FocusWidgetExtension;
+		};
 		A27E2B832F853AAD00B1721A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6001 /* Project object */;
@@ -58,6 +70,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				A27E2B852F853AAD00B1721A /* FocusFlowLiveActivityExtension.appex in Embed Foundation Extensions */,
+				A26EE99F2F869F1000E36E96 /* FocusWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,10 +96,13 @@
 		2016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2018 /* FocusFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A26EE98E2F869F0F00E36E96 /* FocusWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FocusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27E2B6B2F852AAD00B1721A /* FocusFlow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FocusFlow.entitlements; sourceTree = "<group>"; };
 		A27E2B702F853AAB00B1721A /* FocusFlowLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FocusFlowLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27E2B712F853AAB00B1721A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		A27E2B732F853AAB00B1721A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A28163B22F86A8EF00BCF738 /* FocusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FocusWidgetExtension.entitlements; sourceTree = "<group>"; };
+		A281640D2F87F72B00BCF738 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		A2E700802F8405D4001D889B /* cafe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cafe.mp3; sourceTree = "<group>"; };
 		A2E700812F8405D4001D889B /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
 		A2E700822F8405D4001D889B /* forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = forest.mp3; sourceTree = "<group>"; };
@@ -94,6 +110,7 @@
 		A2E700842F8405D4001D889B /* rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rain.mp3; sourceTree = "<group>"; };
 		A2E700852F8405D4001D889B /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
 		A2F4AC762F848564001E0EEB /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		A2F4AC782F848564001E0EEC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A2FF1001 /* LockScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenManager.swift; sourceTree = "<group>"; };
 		A2FF1002 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A2FF1003 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
@@ -102,6 +119,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A26EE9A22F869F1000E36E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A26EE98D2F869F0F00E36E96 /* FocusWidgetExtension */;
+		};
 		A27E2B862F853AAD00B1721A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -112,6 +136,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A26EE9912F869F0F00E36E96 /* FocusWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A26EE9A22F869F1000E36E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusWidget; sourceTree = "<group>"; };
 		A27E2B752F853AAB00B1721A /* FocusFlowLiveActivity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A27E2B862F853AAD00B1721A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusFlowLiveActivity; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -121,6 +146,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F4AC772F848564001E0EEB /* HealthKit.framework in Frameworks */,
+				A2F4AC792F848564001E0EEC /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A26EE98B2F869F0F00E36E96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A26EE9902F869F0F00E36E96 /* SwiftUI.framework in Frameworks */,
+				A26EE98F2F869F0F00E36E96 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,17 +174,19 @@
 		4000 = {
 			isa = PBXGroup;
 			children = (
+				A28163B22F86A8EF00BCF738 /* FocusWidgetExtension.entitlements */,
 				A27E2B6B2F852AAD00B1721A /* FocusFlow.entitlements */,
 				2001 /* FocusFlowApp.swift */,
+				A27E2B752F853AAB00B1721A /* FocusFlowLiveActivity */,
 				4001 /* Views */,
 				4002 /* Managers */,
 				4003 /* Models */,
 				4004 /* Utilities */,
 				A2E700862F8405D4001D889B /* Sounds */,
+				A26EE9912F869F0F00E36E96 /* FocusWidget */,
+				A2F4AC752F848564001E0EEB /* Frameworks */,
 				2016 /* Assets.xcassets */,
 				2017 /* Info.plist */,
-				A27E2B752F853AAB00B1721A /* FocusFlowLiveActivity */,
-				A2F4AC752F848564001E0EEB /* Frameworks */,
 				4010 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -172,6 +209,7 @@
 		4002 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A281640D2F87F72B00BCF738 /* ThemeManager.swift */,
 				2009 /* TimerManager.swift */,
 				2010 /* StatsManager.swift */,
 				2011 /* SoundManager.swift */,
@@ -206,6 +244,7 @@
 			children = (
 				2018 /* FocusFlow.app */,
 				A27E2B702F853AAB00B1721A /* FocusFlowLiveActivityExtension.appex */,
+				A26EE98E2F869F0F00E36E96 /* FocusWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				A2F4AC762F848564001E0EEB /* HealthKit.framework */,
+				A2F4AC782F848564001E0EEC /* StoreKit.framework */,
 				A27E2B712F853AAB00B1721A /* WidgetKit.framework */,
 				A27E2B732F853AAB00B1721A /* SwiftUI.framework */,
 			);
@@ -249,11 +289,34 @@
 			);
 			dependencies = (
 				A27E2B842F853AAD00B1721A /* PBXTargetDependency */,
+				A26EE99E2F869F1000E36E96 /* PBXTargetDependency */,
 			);
 			name = FocusFlow;
 			productName = FocusFlow;
 			productReference = 2018 /* FocusFlow.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A26EE98D2F869F0F00E36E96 /* FocusWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A26EE9A32F869F1000E36E96 /* Build configuration list for PBXNativeTarget "FocusWidgetExtension" */;
+			buildPhases = (
+				A26EE98A2F869F0F00E36E96 /* Sources */,
+				A26EE98B2F869F0F00E36E96 /* Frameworks */,
+				A26EE98C2F869F0F00E36E96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A26EE9912F869F0F00E36E96 /* FocusWidget */,
+			);
+			name = FocusWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = FocusWidgetExtension;
+			productReference = A26EE98E2F869F0F00E36E96 /* FocusWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		A27E2B6F2F853AAB00B1721A /* FocusFlowLiveActivityExtension */ = {
 			isa = PBXNativeTarget;
@@ -290,6 +353,9 @@
 					5001 = {
 						CreatedOnToolsVersion = 15.0;
 					};
+					A26EE98D2F869F0F00E36E96 = {
+						CreatedOnToolsVersion = 26.4;
+					};
 					A27E2B6F2F853AAB00B1721A = {
 						CreatedOnToolsVersion = 26.4;
 					};
@@ -310,6 +376,7 @@
 			targets = (
 				5001 /* FocusFlow */,
 				A27E2B6F2F853AAB00B1721A /* FocusFlowLiveActivityExtension */,
+				A26EE98D2F869F0F00E36E96 /* FocusWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -326,6 +393,13 @@
 				A2E7008A2F8405D4001D889B /* fireplace.mp3 in Resources */,
 				A2E7008B2F8405D4001D889B /* cafe.mp3 in Resources */,
 				A2E7008C2F8405D4001D889B /* wind.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A26EE98C2F869F0F00E36E96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +437,14 @@
 				A2FF0003 /* ShareManager.swift in Sources */,
 				A2FF0004 /* HealthManager.swift in Sources */,
 				A2FF0005 /* DurationPickerView.swift in Sources */,
+				A281640E2F87F72B00BCF738 /* ThemeManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A26EE98A2F869F0F00E36E96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +458,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A26EE99E2F869F1000E36E96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A26EE98D2F869F0F00E36E96 /* FocusWidgetExtension */;
+			targetProxy = A26EE99D2F869F1000E36E96 /* PBXContainerItemProxy */;
+		};
 		A27E2B842F853AAD00B1721A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A27E2B6F2F853AAB00B1721A /* FocusFlowLiveActivityExtension */;
@@ -492,15 +579,16 @@
 		7005 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FocusFlow.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = K234XS667P;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -524,15 +612,16 @@
 		7006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FocusFlow.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = K234XS667P;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -553,6 +642,91 @@
 			};
 			name = Release;
 		};
+		A26EE9A02F869F1000E36E96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = FocusWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K234XS667P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fireny.focusflow2026.FocusWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A26EE9A12F869F1000E36E96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = FocusWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K234XS667P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fireny.focusflow2026.FocusWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A27E2B882F853AAD00B1721A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -568,7 +742,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = K234XS667P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FocusFlowLiveActivity/Info.plist;
@@ -610,7 +784,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = K234XS667P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FocusFlowLiveActivity/Info.plist;
@@ -653,6 +827,15 @@
 			buildConfigurations = (
 				7003 /* Debug */,
 				7004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A26EE9A32F869F1000E36E96 /* Build configuration list for PBXNativeTarget "FocusWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A26EE9A02F869F1000E36E96 /* Debug */,
+				A26EE9A12F869F1000E36E96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

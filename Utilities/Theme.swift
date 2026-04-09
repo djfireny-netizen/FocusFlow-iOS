@@ -21,45 +21,45 @@ struct HapticFeedback {
 
 // MARK: - 颜色主题
 struct AppTheme {
-    // 主要渐变色 - 更柔和的紫蓝渐变
+    // 主要渐变色 - 蓝橙渐变（参考设计风格）
     static let primaryGradient = LinearGradient(
-        colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
+        colors: [Color(hex: "4facfe"), Color(hex: "ff6b35")],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
     
-    // 专注状态渐变
+    // 专注状态渐变 - 暖橙色
     static let focusGradient = LinearGradient(
-        colors: [Color(hex: "f093fb"), Color(hex: "f5576c")],
+        colors: [Color(hex: "ff6b35"), Color(hex: "ff8c42")],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
     
-    // 休息状态渐变
+    // 休息状态渐变 - 冷蓝色
     static let breakGradient = LinearGradient(
         colors: [Color(hex: "4facfe"), Color(hex: "00f2fe")],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
     
-    // 背景色 - 更温暖的深色
-    static let backgroundPrimary = Color(hex: "0d0d1a")
-    static let backgroundSecondary = Color(hex: "1a1a2e")
-    static let cardBackground = Color(hex: "1e1e3f")
-    static let cardBackgroundHover = Color(hex: "252550")
+    // 背景色 - 深色主题
+    static let backgroundPrimary = Color(hex: "0a0a0a")
+    static let backgroundSecondary = Color(hex: "141414")
+    static let cardBackground = Color(hex: "1a1a1a").opacity(0.8)
+    static let cardBackgroundHover = Color(hex: "252525")
     
-    // 强调色
-    static let accentGreen = Color(hex: "00d9a6")
+    // 强调色 - 蓝橙配色
     static let accentBlue = Color(hex: "4facfe")
+    static let accentOrange = Color(hex: "ff6b35")
     static let accentPurple = Color(hex: "a18cd1")
-    static let accentOrange = Color(hex: "fbc2eb")
+    static let accentGreen = Color(hex: "00d9a6")
     static let accentPink = Color(hex: "ff6b9d")
     static let accentYellow = Color(hex: "ffd93d")
     
     // 文字颜色
     static let textPrimary = Color.white
-    static let textSecondary = Color(hex: "b8b8d1")
-    static let textTertiary = Color(hex: "6b6b8d")
+    static let textSecondary = Color(hex: "a0a0a0")
+    static let textTertiary = Color(hex: "666666")
     
     // 状态色
     static let success = Color(hex: "00d9a6")
@@ -67,8 +67,24 @@ struct AppTheme {
     static let error = Color(hex: "ff6b6b")
     
     // 阴影
-    static let shadowColor = Color.black.opacity(0.3)
-    static let glowColor = Color(hex: "667eea").opacity(0.3)
+    static let shadowColor = Color.black.opacity(0.5)
+    static let glowColor = Color(hex: "4facfe").opacity(0.3)
+    
+    // 渐变球体
+    static func gradientOrb(size: CGFloat) -> some View {
+        Circle()
+            .fill(
+                RadialGradient(
+                    colors: [Color(hex: "ff6b35"), Color(hex: "4facfe"), Color.clear],
+                    center: .center,
+                    startRadius: 0,
+                    endRadius: size / 2
+                )
+            )
+            .frame(width: size, height: size)
+            .blur(radius: 60)
+            .opacity(0.6)
+    }
 }
 
 // MARK: - 动画主题
