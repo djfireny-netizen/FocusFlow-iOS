@@ -69,7 +69,7 @@ enum WhiteNoiseType: String, CaseIterable, Identifiable {
 }
 
 // MARK: - 计时器状态
-enum TimerState {
+enum TimerState: String {
     case idle
     case focusing
     case onBreak

@@ -42,11 +42,19 @@ struct FocusFlowApp: App {
                         }
                     }
                     
+                    // 激活 Watch 通信
+                    if WCSession.isSupported() {
+                        iPhoneConnectivityManager.shared.activate()
+                    }
+                    
                     // 更新小组件数据
                     updateWidgetData()
                     
                     // 设置计时器与白噪音的联动 - 在App级别确保切换标签页不会停止白噪音
                     setupTimerSoundBinding()
+                    
+                    // 监听 Watch 命令
+                    setupWatchCommandListener()
                 }
         }
         .modelContainer(sharedModelContainer)
@@ -67,6 +75,52 @@ struct FocusFlowApp: App {
                 }
             }
         }
+    }
+    
+    // MARK: - 监听 Watch 命令
+    private func setupWatchCommandListener() {
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("WatchCommandReceived"),
+            object: nil,
+            queue: .main
+        ) { notification in
+            guard let command = notification.userInfo?["command"] as? SyncCommand else { return }
+            
+            DispatchQueue.main.async {
+                switch command {
+                case .startTimer:
+                    self.timerManager.startTimer()
+                case .pauseTimer:
+                    self.timerManager.pauseTimer()
+                case .resumeTimer:
+                    self.timerManager.resumeTimer()
+                case .stopTimer:
+                    self.timerManager.stopTimer()
+                case .skipToBreak:
+                    self.timerManager.skipToBreak()
+                default:
+                    break
+                }
+                
+                // 同步状态回 Watch
+                self.syncStateToWatch()
+            }
+        }
+    }
+    
+    // MARK: - 同步状态到 Watch
+    private func syncStateToWatch() {
+        let state = TimerStateSync(
+            state: timerManager.timerState.rawValue,
+            timeRemaining: timerManager.timeRemaining,
+            progress: timerManager.progress,
+            currentSession: timerManager.currentSession,
+            focusDuration: timerManager.focusDuration,
+            breakDuration: timerManager.breakDuration,
+            selectedCategory: timerManager.selectedCategory,
+            isPaused: timerManager.timerState == .paused
+        )
+        iPhoneConnectivityManager.shared.sendTimerState(state)
     }
     
     // MARK: - 更新小组件数据
