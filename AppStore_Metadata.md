@@ -77,8 +77,8 @@ xcrun simctl boot "iPad Pro 12.9-inch (6th generation)"
 - [x] 副标题：（可选）让专注成为日常习惯
 - [x] 描述：（中英文，见下方）
 - [x] 关键词：（100字符限制）
-- [x] 技术支持网址：https://djfireny-netizen.github.io/focusflow-support/SUPPORT.md
-- [x] 隐私政策网址：https://djfireny-netizen.github.io/focusflow-support/PRIVACY_POLICY.md
+- [x] 技术支持网址：https://djfireny-netizen.github.io/focusflow-support/support.html
+- [x] 隐私政策网址：https://djfireny-netizen.github.io/focusflow-support/privacy.html
 - [x] 版权信息：© 2026 FocusFlow Team ⚠️ **必填**
 - [x] 分级：4+
 - [x] iPhone 截图（至少 1 张）⚠️ **必填**

@@ -170,7 +170,7 @@ focus,pomodoro,timer,productivity,white noise,mindfulness,health,study,work,habi
 
 ### 技术支持网址
 ```
-https://djfireny-netizen.github.io/focusflow-support/SUPPORT.md
+https://djfireny-netizen.github.io/focusflow-support/support.html
 ```
 
 ### 营销网址（可选）
@@ -180,12 +180,12 @@ https://djfireny-netizen.github.io/focusflow-support/
 
 ### 隐私政策网址
 ```
-https://djfireny-netizen.github.io/focusflow-support/PRIVACY_POLICY.md
+https://djfireny-netizen.github.io/focusflow-support/privacy.html
 ```
 
 ### 服务条款网址
 ```
-https://djfireny-netizen.github.io/focusflow-support/TERMS_OF_SERVICE.md
+https://djfireny-netizen.github.io/focusflow-support/terms.html
 ```
 
 ---
@@ -358,7 +358,7 @@ FocusFlow 是一款专注力提升应用，核心功能完全免费：
 
 - **开发者**: FocusFlow Team
 - **邮箱**: fireny@live.com
-- **技术支持**: https://djfireny-netizen.github.io/focusflow-support/SUPPORT.md
+- **技术支持**: https://djfireny-netizen.github.io/focusflow-support/support.html
 
 ---
 

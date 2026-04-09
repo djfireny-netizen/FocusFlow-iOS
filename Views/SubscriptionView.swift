@@ -259,7 +259,7 @@ struct SubscriptionView: View {
                     .foregroundColor(AppTheme.textTertiary)
                 
                 Button(L("privacy_policy")) {
-                    if let url = URL(string: "https://djfireny-netizen.github.io/focusflow-support/PRIVACY_POLICY.md") {
+                    if let url = URL(string: "https://djfireny-netizen.github.io/focusflow-support/privacy.html") {
                         UIApplication.shared.open(url)
                     }
                 }
