@@ -41,6 +41,9 @@ struct SubscriptionView: View {
                         // 头部
                         headerSection
                         
+                        // 社会证明
+                        socialProofSection
+                        
                         // 免费试用提示
                         if !subscriptionManager.isFreeTrial {
                             freeTrialBanner
@@ -92,6 +95,91 @@ struct SubscriptionView: View {
                 .foregroundColor(AppTheme.textSecondary)
         }
         .padding(.vertical, 20)
+    }
+    
+    // MARK: - 社会证明
+    private var socialProofSection: some View {
+        VStack(spacing: 12) {
+            // 用户数量
+            HStack(spacing: 20) {
+                VStack(spacing: 4) {
+                    Text("10,000+")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(AppTheme.accentBlue)
+                    
+                    Text("活跃用户")
+                        .font(.caption)
+                        .foregroundColor(AppTheme.textSecondary)
+                }
+                
+                Divider()
+                    .frame(height: 30)
+                
+                VStack(spacing: 4) {
+                    Text("4.9")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(AppTheme.accentYellow)
+                    
+                    Text("App Store 评分")
+                        .font(.caption)
+                        .foregroundColor(AppTheme.textSecondary)
+                }
+                
+                Divider()
+                    .frame(height: 30)
+                
+                VStack(spacing: 4) {
+                    Text("500,000+")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(AppTheme.accentGreen)
+                    
+                    Text("专注次数")
+                        .font(.caption)
+                        .foregroundColor(AppTheme.textSecondary)
+                }
+            }
+            .padding()
+            .background(AppTheme.cardBackground)
+            .cornerRadius(16)
+            
+            // 限时优惠
+            HStack(spacing: 8) {
+                Image(systemName: "timer")
+                    .foregroundColor(.red)
+                
+                Text("限时优惠：年费立省 40%")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.red)
+                
+                Spacer()
+                
+                Text("仅剩 3 天")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.red)
+                    .cornerRadius(8)
+            }
+            .padding()
+            .background(
+                LinearGradient(
+                    colors: [Color.red.opacity(0.1), Color.orange.opacity(0.1)],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.red.opacity(0.3), lineWidth: 1)
+            )
+        }
     }
     
     // MARK: - 免费试用横幅
