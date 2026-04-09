@@ -35,6 +35,13 @@ struct FocusFlowApp: App {
                     statsManager.loadData()
                     subscriptionManager.checkSubscriptionStatus()
                     
+                    // 清理旧的实时活动
+                    if #available(iOS 16.1, *) {
+                        Task {
+                            await LiveActivityManager.shared.endAllActivities()
+                        }
+                    }
+                    
                     // 更新小组件数据
                     updateWidgetData()
                     

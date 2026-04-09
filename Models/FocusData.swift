@@ -954,6 +954,15 @@ class LiveActivityManager {
             print("实时活动已结束")
         }
     }
+    
+    // MARK: - 清理所有活动
+    func endAllActivities() async {
+        for activity in Activity<FocusActivityAttributes>.activities {
+            await activity.end(nil, dismissalPolicy: .immediate)
+        }
+        currentActivity = nil
+        print("所有实时活动已清理")
+    }
 }
 
 // MARK: - 专注记录模型
