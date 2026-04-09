@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import WidgetKit
+import WatchConnectivity
 
 @main
 struct FocusFlowApp: App {
@@ -42,7 +43,8 @@ struct FocusFlowApp: App {
                         }
                     }
                     
-                    // 激活 Watch 通信（暂时注释，等待 Watch Target 创建后启用）
+                    // 激活 Watch 通信（需要在 Xcode 中添加 Watch 文件到项目后启用）
+                    // TODO: 在 Xcode 中右键 Managers 文件夹 → Add Files to FocusFlow → 选择 WatchSyncData.swift 和 iPhoneConnectivityManager.swift
                     // if WCSession.isSupported() {
                     //     iPhoneConnectivityManager.shared.activate()
                     // }
@@ -53,7 +55,7 @@ struct FocusFlowApp: App {
                     // 设置计时器与白噪音的联动 - 在App级别确保切换标签页不会停止白噪音
                     setupTimerSoundBinding()
                     
-                    // 监听 Watch 命令（暂时注释，等待 Watch Target 创建后启用）
+                    // 监听 Watch 命令（需要在 Xcode 中添加 Watch 文件到项目后启用）
                     // setupWatchCommandListener()
                 }
         }
@@ -77,7 +79,8 @@ struct FocusFlowApp: App {
         }
     }
     
-    // MARK: - 监听 Watch 命令（暂时注释，等待 Watch Target 创建后启用）
+    // MARK: - 监听 Watch 命令（需要在 Xcode 中添加 Watch 文件到项目后启用）
+    // TODO: 在 Xcode 中右键 Managers 文件夹 → Add Files to FocusFlow → 选择 WatchSyncData.swift 和 iPhoneConnectivityManager.swift
     /*
     private func setupWatchCommandListener() {
         NotificationCenter.default.addObserver(

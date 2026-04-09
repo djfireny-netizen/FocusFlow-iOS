@@ -18,6 +18,7 @@ struct SettingsView: View {
     @State private var showBreakDurationPicker: Bool = false
     @State private var showLanguagePicker = false
     @State private var showThemePicker = false
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         ZStack {
@@ -415,6 +416,55 @@ struct SettingsView: View {
                 .foregroundColor(AppTheme.textPrimary)
             
             VStack(spacing: 1) {
+                // 导出 CSV 数据
+                Button(action: {
+                    exportDataAsCSV()
+                }) {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(AppTheme.accentBlue)
+                            .frame(width: 30)
+                        
+                        Text("导出专注数据 (CSV)")
+                            .foregroundColor(AppTheme.textPrimary)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(AppTheme.textTertiary)
+                    }
+                    .padding()
+                }
+                
+                Divider()
+                    .padding(.leading, 62)
+                
+                // 导出统计报告
+                Button(action: {
+                    exportStatsReport()
+                }) {
+                    HStack {
+                        Image(systemName: "doc.text")
+                            .foregroundColor(AppTheme.accentBlue)
+                            .frame(width: 30)
+                        
+                        Text("导出统计报告")
+                            .foregroundColor(AppTheme.textPrimary)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(AppTheme.textTertiary)
+                    }
+                    .padding()
+                }
+                
+                Divider()
+                    .padding(.leading, 62)
+                
+                // 清除数据
                 Button(action: {
                     showClearSheet = true
                 }) {
@@ -953,6 +1003,41 @@ struct ThemePickerView: View {
     private func showUpgradeAlert() {
         // TODO: 显示升级弹窗
         print("需要升级到 Premium")
+    }
+    
+    // MARK: - 导出数据
+    private func exportDataAsCSV() {
+        // 获取所有专注会话
+        let fetchDescriptor = FetchDescriptor<FocusSession>()
+        guard let sessions = try? modelContext.fetch(fetchDescriptor) else {
+            print("❌ 获取数据失败")
+            return
+        }
+        
+        guard let url = ExportManager.shared.exportFocusDataAsCSV(sessions: sessions) else {
+            print("❌ 导出失败")
+            return
+        }
+        
+        ExportManager.shared.shareFile(url: url)
+    }
+    
+    private func exportStatsReport() {
+        let statsManager = StatsManager.shared
+        
+        guard let url = ExportManager.shared.exportStatsAsText(
+            totalSessions: statsManager.totalSessions,
+            totalFocusTime: statsManager.totalFocusTime,
+            currentStreak: statsManager.currentStreak,
+            longestStreak: statsManager.longestStreak,
+            todaySessions: statsManager.todaySessions,
+            todayFocusTime: statsManager.todayFocusTime
+        ) else {
+            print("❌ 导出失败")
+            return
+        }
+        
+        ExportManager.shared.shareFile(url: url)
     }
 }
 
