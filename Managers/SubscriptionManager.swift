@@ -336,12 +336,12 @@ struct PremiumFeature {
 struct PremiumFeatures {
     static var allFeatures: [PremiumFeature] {
         [
-            PremiumFeature(icon: "timer", title: L("feature_custom_duration"), description: L("feature_custom_duration_desc")),
-            PremiumFeature(icon: "chart.bar.fill", title: L("feature_detailed_stats"), description: L("feature_detailed_stats_desc")),
-            PremiumFeature(icon: "waveform", title: L("feature_white_noise"), description: L("feature_white_noise_desc")),
-            PremiumFeature(icon: "tag.fill", title: L("feature_category_tags"), description: L("feature_category_tags_desc")),
-            PremiumFeature(icon: "icloud.fill", title: L("feature_icloud_sync"), description: L("feature_icloud_sync_desc")),
-            PremiumFeature(icon: "chart.line.uptrend.xyaxis", title: L("feature_widgets"), description: L("feature_widgets_desc"))
+            PremiumFeature(icon: "paintpalette.fill", title: L("feature_themes"), description: L("feature_themes_desc")),
+            PremiumFeature(icon: "chart.line.uptrend.xyaxis", title: L("feature_advanced_stats"), description: L("feature_advanced_stats_desc")),
+            PremiumFeature(icon: "apple.logo", title: L("feature_watch_app"), description: L("feature_watch_app_desc")),
+            PremiumFeature(icon: "star.fill", title: L("feature_no_ads"), description: L("feature_no_ads_desc")),
+            PremiumFeature(icon: "infinity", title: L("feature_lifetime"), description: L("feature_lifetime_desc")),
+            PremiumFeature(icon: "heart.fill", title: L("feature_priority_support"), description: L("feature_priority_support_desc"))
         ]
     }
 }
