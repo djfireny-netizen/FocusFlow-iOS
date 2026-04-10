@@ -338,7 +338,7 @@ struct SubscriptionView: View {
             
             HStack(spacing: 12) {
                 Button(L("terms_of_service")) {
-                    if let url = URL(string: "https://djfireny-netizen.github.io/focusflow-support/TERMS_OF_SERVICE.md") {
+                    if let url = URL(string: "https://djfireny-netizen.github.io/focusflow-support/terms-of-service-en.html") {
                         UIApplication.shared.open(url)
                     }
                 }
