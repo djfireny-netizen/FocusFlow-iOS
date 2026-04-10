@@ -64,6 +64,20 @@
 			remoteGlobalIDString = A27E2B6F2F853AAB00B1721A;
 			remoteInfo = FocusFlowLiveActivityExtension;
 		};
+		A281645B2F89142E00BCF738 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A281644D2F89142D00BCF738;
+			remoteInfo = "WatchFocusFlow Watch App";
+		};
+		A28164652F89142E00BCF738 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A281644D2F89142D00BCF738;
+			remoteInfo = "WatchFocusFlow Watch App";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -111,6 +125,9 @@
 		A28164342F88831100BCF738 /* ExportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManager.swift; sourceTree = "<group>"; };
 		A28164352F88831100BCF738 /* iPhoneConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneConnectivityManager.swift; sourceTree = "<group>"; };
 		A28164362F88831100BCF738 /* WatchSyncData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncData.swift; sourceTree = "<group>"; };
+		A281644E2F89142D00BCF738 /* WatchFocusFlow Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchFocusFlow Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A281645A2F89142E00BCF738 /* WatchFocusFlow Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatchFocusFlow Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A28164642F89142E00BCF738 /* WatchFocusFlow Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WatchFocusFlow Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2E700802F8405D4001D889B /* cafe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cafe.mp3; sourceTree = "<group>"; };
 		A2E700812F8405D4001D889B /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
 		A2E700822F8405D4001D889B /* forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = forest.mp3; sourceTree = "<group>"; };
@@ -146,6 +163,10 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A26EE9912F869F0F00E36E96 /* FocusWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A26EE9A22F869F1000E36E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusWidget; sourceTree = "<group>"; };
 		A27E2B752F853AAB00B1721A /* FocusFlowLiveActivity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A27E2B862F853AAD00B1721A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusFlowLiveActivity; sourceTree = "<group>"; };
+		A28164402F89131000BCF738 /* WatchFocusFlow */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WatchFocusFlow; sourceTree = "<group>"; };
+		A281644F2F89142D00BCF738 /* WatchFocusFlow Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WatchFocusFlow Watch App"; sourceTree = "<group>"; };
+		A281645D2F89142E00BCF738 /* WatchFocusFlow Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WatchFocusFlow Watch AppTests"; sourceTree = "<group>"; };
+		A28164672F89142E00BCF738 /* WatchFocusFlow Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WatchFocusFlow Watch AppUITests"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +197,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A281644B2F89142D00BCF738 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A28164572F89142E00BCF738 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A28164612F89142E00BCF738 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -192,6 +234,10 @@
 				4004 /* Utilities */,
 				A2E700862F8405D4001D889B /* Sounds */,
 				A26EE9912F869F0F00E36E96 /* FocusWidget */,
+				A28164402F89131000BCF738 /* WatchFocusFlow */,
+				A281644F2F89142D00BCF738 /* WatchFocusFlow Watch App */,
+				A281645D2F89142E00BCF738 /* WatchFocusFlow Watch AppTests */,
+				A28164672F89142E00BCF738 /* WatchFocusFlow Watch AppUITests */,
 				A2F4AC752F848564001E0EEB /* Frameworks */,
 				2016 /* Assets.xcassets */,
 				2017 /* Info.plist */,
@@ -257,6 +303,9 @@
 				2018 /* FocusFlow.app */,
 				A27E2B702F853AAB00B1721A /* FocusFlowLiveActivityExtension.appex */,
 				A26EE98E2F869F0F00E36E96 /* FocusWidgetExtension.appex */,
+				A281644E2F89142D00BCF738 /* WatchFocusFlow Watch App.app */,
+				A281645A2F89142E00BCF738 /* WatchFocusFlow Watch AppTests.xctest */,
+				A28164642F89142E00BCF738 /* WatchFocusFlow Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,6 +401,74 @@
 			productReference = A27E2B702F853AAB00B1721A /* FocusFlowLiveActivityExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		A281644D2F89142D00BCF738 /* WatchFocusFlow Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A281646C2F89142E00BCF738 /* Build configuration list for PBXNativeTarget "WatchFocusFlow Watch App" */;
+			buildPhases = (
+				A281644A2F89142D00BCF738 /* Sources */,
+				A281644B2F89142D00BCF738 /* Frameworks */,
+				A281644C2F89142D00BCF738 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A281644F2F89142D00BCF738 /* WatchFocusFlow Watch App */,
+			);
+			name = "WatchFocusFlow Watch App";
+			packageProductDependencies = (
+			);
+			productName = "WatchFocusFlow Watch App";
+			productReference = A281644E2F89142D00BCF738 /* WatchFocusFlow Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A28164592F89142E00BCF738 /* WatchFocusFlow Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A281646F2F89142E00BCF738 /* Build configuration list for PBXNativeTarget "WatchFocusFlow Watch AppTests" */;
+			buildPhases = (
+				A28164562F89142E00BCF738 /* Sources */,
+				A28164572F89142E00BCF738 /* Frameworks */,
+				A28164582F89142E00BCF738 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A281645C2F89142E00BCF738 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A281645D2F89142E00BCF738 /* WatchFocusFlow Watch AppTests */,
+			);
+			name = "WatchFocusFlow Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "WatchFocusFlow Watch AppTests";
+			productReference = A281645A2F89142E00BCF738 /* WatchFocusFlow Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A28164632F89142E00BCF738 /* WatchFocusFlow Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A28164722F89142E00BCF738 /* Build configuration list for PBXNativeTarget "WatchFocusFlow Watch AppUITests" */;
+			buildPhases = (
+				A28164602F89142E00BCF738 /* Sources */,
+				A28164612F89142E00BCF738 /* Frameworks */,
+				A28164622F89142E00BCF738 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A28164662F89142E00BCF738 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A28164672F89142E00BCF738 /* WatchFocusFlow Watch AppUITests */,
+			);
+			name = "WatchFocusFlow Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "WatchFocusFlow Watch AppUITests";
+			productReference = A28164642F89142E00BCF738 /* WatchFocusFlow Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -371,6 +488,17 @@
 					A27E2B6F2F853AAB00B1721A = {
 						CreatedOnToolsVersion = 26.4;
 					};
+					A281644D2F89142D00BCF738 = {
+						CreatedOnToolsVersion = 26.4;
+					};
+					A28164592F89142E00BCF738 = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = A281644D2F89142D00BCF738;
+					};
+					A28164632F89142E00BCF738 = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = A281644D2F89142D00BCF738;
+					};
 				};
 			};
 			buildConfigurationList = 7002 /* Build configuration list for PBXProject "FocusFlow" */;
@@ -389,6 +517,9 @@
 				5001 /* FocusFlow */,
 				A27E2B6F2F853AAB00B1721A /* FocusFlowLiveActivityExtension */,
 				A26EE98D2F869F0F00E36E96 /* FocusWidgetExtension */,
+				A281644D2F89142D00BCF738 /* WatchFocusFlow Watch App */,
+				A28164592F89142E00BCF738 /* WatchFocusFlow Watch AppTests */,
+				A28164632F89142E00BCF738 /* WatchFocusFlow Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -416,6 +547,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A27E2B6E2F853AAB00B1721A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A281644C2F89142D00BCF738 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A28164582F89142E00BCF738 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A28164622F89142E00BCF738 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,6 +623,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A281644A2F89142D00BCF738 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A28164562F89142E00BCF738 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A28164602F89142E00BCF738 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -483,6 +656,16 @@
 			isa = PBXTargetDependency;
 			target = A27E2B6F2F853AAB00B1721A /* FocusFlowLiveActivityExtension */;
 			targetProxy = A27E2B832F853AAD00B1721A /* PBXContainerItemProxy */;
+		};
+		A281645C2F89142E00BCF738 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A281644D2F89142D00BCF738 /* WatchFocusFlow Watch App */;
+			targetProxy = A281645B2F89142E00BCF738 /* PBXContainerItemProxy */;
+		};
+		A28164662F89142E00BCF738 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A281644D2F89142D00BCF738 /* WatchFocusFlow Watch App */;
+			targetProxy = A28164652F89142E00BCF738 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -826,6 +1009,219 @@
 			};
 			name = Release;
 		};
+		A281646D2F89142E00BCF738 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K234XS667P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchFocusFlow;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.fireny.focusflow2026;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fireny.focusflow2026.watch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Debug;
+		};
+		A281646E2F89142E00BCF738 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K234XS667P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchFocusFlow;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.fireny.focusflow2026;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fireny.focusflow2026.watch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
+		A28164702F89142E00BCF738 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K234XS667P;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fireny.WatchFocusFlow-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchFocusFlow Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WatchFocusFlow Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Debug;
+		};
+		A28164712F89142E00BCF738 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K234XS667P;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fireny.WatchFocusFlow-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchFocusFlow Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WatchFocusFlow Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
+		A28164732F89142E00BCF738 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K234XS667P;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fireny.WatchFocusFlow-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "WatchFocusFlow Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Debug;
+		};
+		A28164742F89142E00BCF738 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K234XS667P;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fireny.WatchFocusFlow-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "WatchFocusFlow Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -861,6 +1257,33 @@
 			buildConfigurations = (
 				A27E2B882F853AAD00B1721A /* Debug */,
 				A27E2B892F853AAD00B1721A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A281646C2F89142E00BCF738 /* Build configuration list for PBXNativeTarget "WatchFocusFlow Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A281646D2F89142E00BCF738 /* Debug */,
+				A281646E2F89142E00BCF738 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A281646F2F89142E00BCF738 /* Build configuration list for PBXNativeTarget "WatchFocusFlow Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A28164702F89142E00BCF738 /* Debug */,
+				A28164712F89142E00BCF738 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A28164722F89142E00BCF738 /* Build configuration list for PBXNativeTarget "WatchFocusFlow Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A28164732F89142E00BCF738 /* Debug */,
+				A28164742F89142E00BCF738 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
