@@ -132,7 +132,12 @@ struct SettingsView: View {
             VStack(spacing: 1) {
                 // 专注时长
                 Button(action: {
-                    showFocusDurationPicker = true
+                    if subscriptionManager.isPremium {
+                        showFocusDurationPicker = true
+                    } else {
+                        // 免费版只能使用预设时长
+                        showUpgradeAlert()
+                    }
                 }) {
                     HStack {
                         HStack {
@@ -161,7 +166,11 @@ struct SettingsView: View {
                 
                 // 休息时长
                 Button(action: {
-                    showBreakDurationPicker = true
+                    if subscriptionManager.isPremium {
+                        showBreakDurationPicker = true
+                    } else {
+                        showUpgradeAlert()
+                    }
                 }) {
                     HStack {
                         HStack {

@@ -337,11 +337,11 @@ struct PremiumFeatures {
     static var allFeatures: [PremiumFeature] {
         [
             PremiumFeature(icon: "paintpalette.fill", title: L("feature_themes"), description: L("feature_themes_desc")),
+            PremiumFeature(icon: "timer", title: L("feature_custom_duration"), description: L("feature_custom_duration_desc")),
+            PremiumFeature(icon: "waveform", title: L("feature_white_noise_pro"), description: L("feature_white_noise_pro_desc")),
             PremiumFeature(icon: "chart.line.uptrend.xyaxis", title: L("feature_advanced_stats"), description: L("feature_advanced_stats_desc")),
             PremiumFeature(icon: "apple.logo", title: L("feature_watch_app"), description: L("feature_watch_app_desc")),
-            PremiumFeature(icon: "star.fill", title: L("feature_no_ads"), description: L("feature_no_ads_desc")),
-            PremiumFeature(icon: "infinity", title: L("feature_lifetime"), description: L("feature_lifetime_desc")),
-            PremiumFeature(icon: "heart.fill", title: L("feature_priority_support"), description: L("feature_priority_support_desc"))
+            PremiumFeature(icon: "star.fill", title: L("feature_no_ads"), description: L("feature_no_ads_desc"))
         ]
     }
 }

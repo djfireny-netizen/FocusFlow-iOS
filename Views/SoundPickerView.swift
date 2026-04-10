@@ -4,6 +4,15 @@ import SwiftUI
 struct SoundPickerView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var soundManager: SoundManager
+    @EnvironmentObject var subscriptionManager: SubscriptionManager
+    
+    // 免费版声音（4 种）
+    let freeSounds: [WhiteNoiseType] = [.rain, .ocean, .forest, .cafe]
+    
+    // Premium 声音（全部）
+    var allSounds: [WhiteNoiseType] {
+        WhiteNoiseType.allCases.filter { $0 != .none }
+    }
     
     var body: some View {
         NavigationView {
@@ -13,9 +22,17 @@ struct SoundPickerView: View {
                 
                 ScrollView {
                     VStack(spacing: 16) {
-                        ForEach(WhiteNoiseType.allCases) { sound in
-                            SoundPickerRow(sound: sound)
+                        // 根据订阅状态显示不同声音
+                        let sounds = subscriptionManager.isPremium ? allSounds : freeSounds
+                        
+                        ForEach(sounds) { sound in
+                            SoundPickerRow(sound: sound, isPremium: subscriptionManager.isPremium)
                                 .environmentObject(soundManager)
+                        }
+                        
+                        // 如果免费版，显示升级提示
+                        if !subscriptionManager.isPremium {
+                            upgradeBanner
                         }
                         
                         // 音量控制
@@ -34,6 +51,36 @@ struct SoundPickerView: View {
                     .foregroundColor(AppTheme.accentBlue)
                 }
             }
+        }
+    }
+    
+    // MARK: - 升级提示
+    private var upgradeBanner: some View {
+        Button(action: {
+            subscriptionManager.showSubscriptionSheet = true
+        }) {
+            HStack {
+                Image(systemName: "crown.fill")
+                    .foregroundColor(AppTheme.accentOrange)
+                
+                Text("解锁全部 7 种白噪音")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(AppTheme.accentOrange)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(AppTheme.accentOrange)
+            }
+            .padding()
+            .background(AppTheme.accentOrange.opacity(0.1))
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(AppTheme.accentOrange.opacity(0.3), lineWidth: 1)
+            )
         }
     }
     
@@ -67,6 +114,7 @@ struct SoundPickerView: View {
 struct SoundPickerRow: View {
     @EnvironmentObject var soundManager: SoundManager
     let sound: WhiteNoiseType
+    let isPremium: Bool
     
     var body: some View {
         Button(action: {
