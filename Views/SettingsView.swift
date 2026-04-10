@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 // L函数和LanguageManager已在LanguageManager.swift中定义
 
@@ -1014,30 +1015,35 @@ struct ThemePickerView: View {
             return
         }
         
-        guard let url = ExportManager.shared.exportFocusDataAsCSV(sessions: sessions) else {
-            print("❌ 导出失败")
-            return
-        }
+        // TODO: 需要在 Xcode 中添加 Managers/ExportManager.swift 到项目
+        // guard let url = ExportManager.shared.exportFocusDataAsCSV(sessions: sessions) else {
+        //     print("❌ 导出失败")
+        //     return
+        // }
+        // ExportManager.shared.shareFile(url: url)
         
-        ExportManager.shared.shareFile(url: url)
+        print("⚠️ 请先在 Xcode 中添加 ExportManager.swift 到项目")
     }
     
     private func exportStatsReport() {
-        let statsManager = StatsManager.shared
+        // TODO: 需要在 Xcode 中添加 Managers/ExportManager.swift 到项目
+        // let statsManager = StatsManager.shared
+        // 
+        // guard let url = ExportManager.shared.exportStatsAsText(
+        //     totalSessions: statsManager.totalSessions,
+        //     totalFocusTime: statsManager.totalFocusTime,
+        //     currentStreak: statsManager.currentStreak,
+        //     longestStreak: statsManager.longestStreak,
+        //     todaySessions: statsManager.todaySessions,
+        //     todayFocusTime: statsManager.todayFocusTime
+        // ) else {
+        //     print("❌ 导出失败")
+        //     return
+        // }
+        // 
+        // ExportManager.shared.shareFile(url: url)
         
-        guard let url = ExportManager.shared.exportStatsAsText(
-            totalSessions: statsManager.totalSessions,
-            totalFocusTime: statsManager.totalFocusTime,
-            currentStreak: statsManager.currentStreak,
-            longestStreak: statsManager.longestStreak,
-            todaySessions: statsManager.todaySessions,
-            todayFocusTime: statsManager.todayFocusTime
-        ) else {
-            print("❌ 导出失败")
-            return
-        }
-        
-        ExportManager.shared.shareFile(url: url)
+        print("⚠️ 请先在 Xcode 中添加 ExportManager.swift 到项目")
     }
 }
 

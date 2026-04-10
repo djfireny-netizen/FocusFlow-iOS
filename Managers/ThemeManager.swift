@@ -157,7 +157,7 @@ struct ThemeBackgroundView: View {
                 .opacity(0.3)
             }
         }
-        .onChange(of: soundManager.currentSound) { newSound in
+        .onChange(of: soundManager.currentSound) { oldSound, newSound in
             themeManager.updateTheme(for: newSound)
         }
     }
