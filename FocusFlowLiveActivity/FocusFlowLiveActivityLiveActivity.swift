@@ -53,47 +53,47 @@ struct FocusLiveActivityView: View {
                 .blur(radius: 80)
                 .opacity(0.5)
             
-            VStack(spacing: 16) {
+            VStack(spacing: 12) {
                 // 顶部信息
                 HStack {
                     // 分类图标
                     Image(systemName: context.attributes.isBreak ? "cup.and.saucer.fill" : "brain.head.profile")
-                        .font(.title3)
+                        .font(.caption)
                     
                     Text(context.attributes.isBreak ? "休息时间" : context.attributes.focusCategory)
-                        .font(.headline)
+                        .font(.subheadline)
                     
                     Spacer()
                     
                     // 番茄钟计数
                     if !context.attributes.isBreak {
-                        Text("第 \(context.state.currentSession) 个")
-                            .font(.caption)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
+                        Text("#\(context.state.currentSession)")
+                            .font(.caption2)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
                             .background(Color.white.opacity(0.2))
-                            .cornerRadius(8)
+                            .cornerRadius(6)
                     }
                     
                     // 暂停指示器
                     if context.state.isPaused {
                         Image(systemName: "pause.circle.fill")
-                            .font(.title3)
+                            .font(.caption)
                             .foregroundColor(.yellow)
                     }
                 }
                 .foregroundColor(.white)
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
                 
                 // 进度条
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 4)
+                        RoundedRectangle(cornerRadius: 3)
                             .fill(Color.white.opacity(0.1))
-                            .frame(height: 6)
+                            .frame(height: 4)
                         
-                        RoundedRectangle(cornerRadius: 4)
+                        RoundedRectangle(cornerRadius: 3)
                             .fill(
                                 LinearGradient(
                                     colors: [Color(hex: "ff6b35"), Color(hex: "4facfe")],
@@ -101,33 +101,34 @@ struct FocusLiveActivityView: View {
                                     endPoint: .trailing
                                 )
                             )
-                            .frame(width: geometry.size.width * context.state.progress, height: 6)
+                            .frame(width: geometry.size.width * context.state.progress, height: 4)
                     }
                 }
-                .frame(height: 6)
-                .padding(.horizontal, 20)
+                .frame(height: 4)
+                .padding(.horizontal, 16)
                 
                 // 倒计时和操作按钮
-                HStack(alignment: .center, spacing: 12) {
+                HStack(alignment: .center, spacing: 8) {
                     // 倒计时（靠左）
                     Text(formattedTime(context.state.timeRemaining))
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
-                        .minimumScaleFactor(0.7)
+                        .minimumScaleFactor(0.6)
                         .lineLimit(1)
+                        .monospacedDigit()
                     
                     Spacer()
                     
                     // 操作按钮（靠右）
-                    HStack(spacing: 12) {
+                    HStack(spacing: 8) {
                         // 暂停/继续按钮
                         Button(action: {
                             // Live Activity 无法直接调用主 App 方法
                         }) {
                             Image(systemName: context.state.isPaused ? "play.fill" : "pause.fill")
-                                .font(.title3)
+                                .font(.caption)
                                 .foregroundColor(.white)
-                                .frame(width: 36, height: 36)
+                                .frame(width: 32, height: 32)
                                 .background(Color.white.opacity(0.2))
                                 .clipShape(Circle())
                         }
@@ -137,18 +138,17 @@ struct FocusLiveActivityView: View {
                             // Live Activity 无法直接调用主 App 方法
                         }) {
                             Image(systemName: "stop.fill")
-                                .font(.title3)
+                                .font(.caption)
                                 .foregroundColor(.white)
-                                .frame(width: 36, height: 36)
+                                .frame(width: 32, height: 32)
                                 .background(Color.red.opacity(0.8))
                                 .clipShape(Circle())
                         }
                     }
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 8)
+                .padding(.bottom, 12)
             }
-            .padding(.vertical, 20)
         }
     }
     
