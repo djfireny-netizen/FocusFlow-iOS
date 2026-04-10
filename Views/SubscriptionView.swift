@@ -283,8 +283,6 @@ struct SubscriptionView: View {
                     // 获取选中的产品
                     guard let productID = selectedPlan.productID,
                           let product = subscriptionManager.products.first(where: { $0.id == productID }) else {
-                        // 产品未加载时的提示
-                        subscriptionManager.purchaseError = "订阅产品未配置，请先在 App Store Connect 创建产品"
                         return
                     }
                     await subscriptionManager.purchase(product)
@@ -305,7 +303,7 @@ struct SubscriptionView: View {
                 .background(AppTheme.primaryGradient)
                 .cornerRadius(16)
             }
-            .disabled(subscriptionManager.isLoading)  // 临时移除 products.isEmpty 检查，用于测试 UI
+            .disabled(subscriptionManager.isLoading || subscriptionManager.products.isEmpty)
             
             // 错误提示
             if let error = subscriptionManager.purchaseError {
