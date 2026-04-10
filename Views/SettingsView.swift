@@ -536,7 +536,13 @@ struct SettingsView: View {
                 
                 // 主题选择（Premium 功能）
                 Button(action: {
-                    showThemePicker = true
+                    // 检查是否为 Premium 用户
+                    if subscriptionManager.isPremium {
+                        showThemePicker = true
+                    } else {
+                        // 提示升级到 Premium
+                        subscriptionManager.showSubscriptionSheet = true
+                    }
                 }) {
                     HStack {
                         Text("主题背景")

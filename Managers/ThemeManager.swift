@@ -138,6 +138,7 @@ extension WhiteNoiseType {
 struct ThemeBackgroundView: View {
     @StateObject private var themeManager = ThemeManager.shared
     @EnvironmentObject var soundManager: SoundManager
+    @EnvironmentObject var subscriptionManager: SubscriptionManager
     
     var body: some View {
         ZStack {
@@ -158,7 +159,10 @@ struct ThemeBackgroundView: View {
             }
         }
         .onChange(of: soundManager.currentSound) { oldSound, newSound in
-            themeManager.updateTheme(for: newSound)
+            // 只有 Premium 用户才自动切换主题
+            if subscriptionManager.isPremium {
+                themeManager.updateTheme(for: newSound)
+            }
         }
     }
 }
