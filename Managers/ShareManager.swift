@@ -146,7 +146,7 @@ struct StatsShareCardView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        Text("专注流")
+                        Text("FocusFlow Go")
                             .font(.caption)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -525,7 +525,7 @@ struct GoalShareCardView: View {
                         Image(systemName: "bolt.fill")
                             .foregroundColor(.yellow)
                         
-                        Text("FocusFlow - 专注流")
+                        Text("FocusFlow Go")
                             .font(.subheadline)
                             .fontWeight(.medium)
                         

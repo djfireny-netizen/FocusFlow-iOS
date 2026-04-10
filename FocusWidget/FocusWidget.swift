@@ -91,7 +91,7 @@ struct FocusWidgetEntryView: View {
                     Image(systemName: "timer")
                         .font(.title2)
                         .foregroundColor(Color(hex: "ff6b35"))
-                    Text("专注流")
+                    Text("FocusFlow Go")
                         .font(.headline)
                         .foregroundColor(.white)
                     Spacer()
@@ -159,7 +159,7 @@ struct FocusWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("专注流")
+        .configurationDisplayName("FocusFlow Go")
         .description("查看今日专注统计")
         .supportedFamilies([.systemMedium])
     }
