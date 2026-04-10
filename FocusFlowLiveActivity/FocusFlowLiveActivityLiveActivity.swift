@@ -118,9 +118,10 @@ struct FocusLiveActivityView: View {
                     
                     // 操作按钮（靠右）
                     HStack(spacing: 16) {
-                        // 暂停/继续按钮
+                        // 暂停/继续按钮（UI 展示，实际操作在主 App 中处理）
                         Button(action: {
-                            // TODO: 调用暂停/继续方法
+                            // Live Activity 无法直接调用主 App 方法
+                            // 用户需要回到主 App 进行操作
                         }) {
                             Image(systemName: context.state.isPaused ? "play.fill" : "pause.fill")
                                 .font(.title2)
@@ -130,9 +131,10 @@ struct FocusLiveActivityView: View {
                                 .cornerRadius(22)
                         }
                         
-                        // 停止按钮
+                        // 停止按钮（UI 展示，实际操作在主 App 中处理）
                         Button(action: {
-                            // TODO: 调用停止方法
+                            // Live Activity 无法直接调用主 App 方法
+                            // 用户需要回到主 App 进行操作
                         }) {
                             Image(systemName: "stop.fill")
                                 .font(.title2)

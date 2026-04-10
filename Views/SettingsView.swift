@@ -417,53 +417,53 @@ struct SettingsView: View {
                 .foregroundColor(AppTheme.textPrimary)
             
             VStack(spacing: 1) {
-                // 导出 CSV 数据
-                Button(action: {
-                    exportDataAsCSV()
-                }) {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(AppTheme.accentBlue)
-                            .frame(width: 30)
-                        
-                        Text("导出专注数据 (CSV)")
-                            .foregroundColor(AppTheme.textPrimary)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundColor(AppTheme.textTertiary)
-                    }
-                    .padding()
-                }
-                
-                Divider()
-                    .padding(.leading, 62)
-                
-                // 导出统计报告
-                Button(action: {
-                    exportStatsReport()
-                }) {
-                    HStack {
-                        Image(systemName: "doc.text")
-                            .foregroundColor(AppTheme.accentBlue)
-                            .frame(width: 30)
-                        
-                        Text("导出统计报告")
-                            .foregroundColor(AppTheme.textPrimary)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundColor(AppTheme.textTertiary)
-                    }
-                    .padding()
-                }
-                
-                Divider()
-                    .padding(.leading, 62)
+                // 导出 CSV 数据（暂时隐藏，等待功能完善后开放）
+                // Button(action: {
+                //     exportDataAsCSV()
+                // }) {
+                //     HStack {
+                //         Image(systemName: "square.and.arrow.up")
+                //             .foregroundColor(AppTheme.accentBlue)
+                //             .frame(width: 30)
+                //         
+                //         Text("导出专注数据 (CSV)")
+                //             .foregroundColor(AppTheme.textPrimary)
+                //         
+                //         Spacer()
+                //         
+                //         Image(systemName: "chevron.right")
+                //             .font(.caption)
+                //             .foregroundColor(AppTheme.textTertiary)
+                //     }
+                //     .padding()
+                // }
+                // 
+                // Divider()
+                //     .padding(.leading, 62)
+                // 
+                // // 导出统计报告
+                // Button(action: {
+                //     exportStatsReport()
+                // }) {
+                //     HStack {
+                //         Image(systemName: "doc.text")
+                //             .foregroundColor(AppTheme.accentBlue)
+                //             .frame(width: 30)
+                //         
+                //         Text("导出统计报告")
+                //             .foregroundColor(AppTheme.textPrimary)
+                //         
+                //         Spacer()
+                //         
+                //         Image(systemName: "chevron.right")
+                //             .font(.caption)
+                //             .foregroundColor(AppTheme.textTertiary)
+                //     }
+                //     .padding()
+                // }
+                // 
+                // Divider()
+                //     .padding(.leading, 62)
                 
                 // 清除数据
                 Button(action: {
