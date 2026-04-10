@@ -19,6 +19,15 @@ class StatsManager: ObservableObject {
         generateCategoryStats(sessions: sessions)
     }
     
+    // MARK: - 获取今日统计（用于 Watch）
+    func getTodayStats() -> TodayStatsData {
+        return TodayStatsData(
+            totalMinutes: Int(todayFocusTime / 60),
+            sessionCount: todaySessions,
+            categories: categoryStats.map { CategoryStatData(name: $0.name, minutes: Int($0.totalTime / 60), count: $0.count) }
+        )
+    }
+    
     // MARK: - 计算统计
     private func calculateStats(from sessions: [FocusSession]) {
         let calendar = Calendar.current
@@ -148,6 +157,19 @@ struct CategoryStat: Identifiable {
     let id = UUID()
     let category: String
     let minutes: Int
+}
+
+// MARK: - Watch 通信数据模型
+struct TodayStatsData {
+    let totalMinutes: Int
+    let sessionCount: Int
+    let categories: [CategoryStatData]
+}
+
+struct CategoryStatData {
+    let name: String
+    let minutes: Int
+    let count: Int
 }
 
 // MARK: - 星期本地化

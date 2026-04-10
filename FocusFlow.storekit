@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>identifier</key>
+    <string>FocusFlowGo</string>
+    <key>localizations</key>
+    <array>
+        <string>zh_CN</string>
+        <string>en_US</string>
+    </array>
+    <key>products</key>
+    <array>
+        <dict>
+            <key>displayPrice</key>
+            <string>¥28.00</string>
+            <key>familyName</key>
+            <string>focusflow</string>
+            <key>productIdentifier</key>
+            <string>focusflow.monthly</string>
+            <key>referenceName</key>
+            <string>月度会员</string>
+            <key>type</key>
+            <string>Auto-Renewable Subscription</string>
+        </dict>
+        <dict>
+            <key>displayPrice</key>
+            <string>¥168.00</string>
+            <key>familyName</key>
+            <string>focusflow</string>
+            <key>productIdentifier</key>
+            <string>focusflow.yearly</string>
+            <key>referenceName</key>
+            <string>年度会员</string>
+            <key>type</key>
+            <string>Auto-Renewable Subscription</string>
+        </dict>
+        <dict>
+            <key>displayPrice</key>
+            <string>¥348.00</string>
+            <key>familyName</key>
+            <string>focusflow</string>
+            <key>productIdentifier</key>
+            <string>focusflow.lifetime</string>
+            <key>referenceName</key>
+            <string>终身会员</string>
+            <key>type</key>
+            <string>Non-Consumable</string>
+        </dict>
+    </array>
+</dict>
+</plist>

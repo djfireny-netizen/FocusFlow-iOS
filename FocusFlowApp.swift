@@ -9,6 +9,7 @@ struct FocusFlowApp: App {
     @StateObject private var soundManager = SoundManager()
     @StateObject private var statsManager = StatsManager()
     @StateObject private var subscriptionManager = SubscriptionManager()
+    @StateObject private var phoneConnectivityManager = PhoneConnectivityManager.shared
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -43,11 +44,11 @@ struct FocusFlowApp: App {
                         }
                     }
                     
-                    // 激活 Watch 通信（需要在 Xcode 中添加 Watch 文件到项目后启用）
-                    // TODO: 在 Xcode 中右键 Managers 文件夹 → Add Files to FocusFlow → 选择 WatchSyncData.swift 和 iPhoneConnectivityManager.swift
-                    // if WCSession.isSupported() {
-                    //     iPhoneConnectivityManager.shared.activate()
-                    // }
+                    // 激活 Watch 通信
+                    PhoneConnectivityManager.shared.configure(
+                        timerManager: timerManager,
+                        statsManager: statsManager
+                    )
                     
                     // 更新小组件数据
                     updateWidgetData()

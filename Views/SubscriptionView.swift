@@ -372,7 +372,7 @@ struct PlanCard: View {
     
     var displayPrice: String {
         guard let product = product else { 
-            return type == .monthly ? "$2.99" : type == .yearly ? "$19.99" : "$49.99"
+            return type == .monthly ? "$3.99" : type == .yearly ? "$24.99" : "$49.99"
         }
         return product.displayPrice
     }
