@@ -59,8 +59,8 @@ struct FocusWidgetEntryView: View {
     
     var body: some View {
         ZStack {
-            // 深色背景
-            Color(hex: "0a0a0a")
+            // 透明背景（使用系统小组件背景）
+            Color.clear
             
             // 渐变球体
             Circle()
@@ -140,6 +140,7 @@ struct FocusWidgetEntryView: View {
             }
             .padding(16)
         }
+        .containerBackground(.clear, for: .widget)
     }
 }
 

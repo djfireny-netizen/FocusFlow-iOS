@@ -108,44 +108,44 @@ struct FocusLiveActivityView: View {
                 .padding(.horizontal, 20)
                 
                 // 倒计时和操作按钮
-                HStack(alignment: .center, spacing: 0) {
+                HStack(alignment: .center, spacing: 12) {
                     // 倒计时（靠左）
                     Text(formattedTime(context.state.timeRemaining))
-                        .font(.system(size: 48, weight: .bold, design: .rounded))
+                        .font(.system(size: 36, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                     
                     Spacer()
                     
                     // 操作按钮（靠右）
-                    HStack(spacing: 16) {
-                        // 暂停/继续按钮（UI 展示，实际操作在主 App 中处理）
+                    HStack(spacing: 12) {
+                        // 暂停/继续按钮
                         Button(action: {
                             // Live Activity 无法直接调用主 App 方法
-                            // 用户需要回到主 App 进行操作
                         }) {
                             Image(systemName: context.state.isPaused ? "play.fill" : "pause.fill")
-                                .font(.title2)
+                                .font(.title3)
                                 .foregroundColor(.white)
-                                .frame(width: 44, height: 44)
+                                .frame(width: 36, height: 36)
                                 .background(Color.white.opacity(0.2))
-                                .cornerRadius(22)
+                                .clipShape(Circle())
                         }
                         
-                        // 停止按钮（UI 展示，实际操作在主 App 中处理）
+                        // 停止按钮
                         Button(action: {
                             // Live Activity 无法直接调用主 App 方法
-                            // 用户需要回到主 App 进行操作
                         }) {
                             Image(systemName: "stop.fill")
-                                .font(.title2)
+                                .font(.title3)
                                 .foregroundColor(.white)
-                                .frame(width: 44, height: 44)
+                                .frame(width: 36, height: 36)
                                 .background(Color.red.opacity(0.8))
-                                .cornerRadius(22)
+                                .clipShape(Circle())
                         }
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 16)
                 .padding(.top, 8)
             }
             .padding(.vertical, 20)
