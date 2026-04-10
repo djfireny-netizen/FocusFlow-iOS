@@ -30,6 +30,10 @@
 		A27E2B742F853AAB00B1721A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27E2B732F853AAB00B1721A /* SwiftUI.framework */; };
 		A27E2B852F853AAD00B1721A /* FocusFlowLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A27E2B702F853AAB00B1721A /* FocusFlowLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A281640E2F87F72B00BCF738 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281640D2F87F72B00BCF738 /* ThemeManager.swift */; };
+		A28164372F88831100BCF738 /* iPhoneConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28164352F88831100BCF738 /* iPhoneConnectivityManager.swift */; };
+		A28164382F88831100BCF738 /* WatchSyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28164362F88831100BCF738 /* WatchSyncData.swift */; };
+		A28164392F88831100BCF738 /* ExportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28164342F88831100BCF738 /* ExportManager.swift */; };
+		A281643A2F88831100BCF738 /* AchievementChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28164332F88831100BCF738 /* AchievementChecker.swift */; };
 		A2E700872F8405D4001D889B /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700842F8405D4001D889B /* rain.mp3 */; };
 		A2E700882F8405D4001D889B /* ocean.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700832F8405D4001D889B /* ocean.mp3 */; };
 		A2E700892F8405D4001D889B /* forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2E700822F8405D4001D889B /* forest.mp3 */; };
@@ -103,6 +107,10 @@
 		A27E2B732F853AAB00B1721A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		A28163B22F86A8EF00BCF738 /* FocusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FocusWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A281640D2F87F72B00BCF738 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		A28164332F88831100BCF738 /* AchievementChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementChecker.swift; sourceTree = "<group>"; };
+		A28164342F88831100BCF738 /* ExportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManager.swift; sourceTree = "<group>"; };
+		A28164352F88831100BCF738 /* iPhoneConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneConnectivityManager.swift; sourceTree = "<group>"; };
+		A28164362F88831100BCF738 /* WatchSyncData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncData.swift; sourceTree = "<group>"; };
 		A2E700802F8405D4001D889B /* cafe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cafe.mp3; sourceTree = "<group>"; };
 		A2E700812F8405D4001D889B /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
 		A2E700822F8405D4001D889B /* forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = forest.mp3; sourceTree = "<group>"; };
@@ -209,6 +217,10 @@
 		4002 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A28164332F88831100BCF738 /* AchievementChecker.swift */,
+				A28164342F88831100BCF738 /* ExportManager.swift */,
+				A28164352F88831100BCF738 /* iPhoneConnectivityManager.swift */,
+				A28164362F88831100BCF738 /* WatchSyncData.swift */,
 				A281640D2F87F72B00BCF738 /* ThemeManager.swift */,
 				2009 /* TimerManager.swift */,
 				2010 /* StatsManager.swift */,
@@ -422,6 +434,10 @@
 				1003 /* TimerView.swift in Sources */,
 				1004 /* StatsView.swift in Sources */,
 				1005 /* AchievementsView.swift in Sources */,
+				A28164372F88831100BCF738 /* iPhoneConnectivityManager.swift in Sources */,
+				A28164382F88831100BCF738 /* WatchSyncData.swift in Sources */,
+				A28164392F88831100BCF738 /* ExportManager.swift in Sources */,
+				A281643A2F88831100BCF738 /* AchievementChecker.swift in Sources */,
 				1006 /* SettingsView.swift in Sources */,
 				1007 /* SubscriptionView.swift in Sources */,
 				1008 /* SoundPickerView.swift in Sources */,

@@ -23,12 +23,12 @@ class ExportManager {
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "HH:mm:ss"
             let startTime = timeFormatter.string(from: session.startTime)
-            let endTime = timeFormatter.string(from: session.endTime ?? Date())
+            let endTime = timeFormatter.string(from: session.endTime)
             
             let durationMinutes = Int(session.duration / 60)
-            let category = session.category.rawValue
+            let category = session.category
             let completed = session.completed ? "是" : "否"
-            let notes = session.notes?.replacingOccurrences(of: ",", with: "，") ?? ""
+            let notes = session.notes.replacingOccurrences(of: ",", with: "，")
             
             let row = "\(date),\(startTime),\(endTime),\(durationMinutes),\(category),\(completed),\(notes)\n"
             csvText += row
@@ -63,7 +63,10 @@ class ExportManager {
         
         var text = "FocusFlow 专注统计报告\n"
         text += "========================\n\n"
-        text += "📅 生成时间: \(Date().formatted(date: .long, time: .short))\n\n"
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy年MM月dd日 HH:mm"
+        text += "📅 生成时间: \(formatter.string(from: Date()))\n\n"
         
         text += "📊 累计统计\n"
         text += "--------\n"

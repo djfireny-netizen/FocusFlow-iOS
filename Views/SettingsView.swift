@@ -1008,51 +1008,11 @@ struct ThemePickerView: View {
     
     // MARK: - 导出数据
     private func exportDataAsCSV() {
-        // TODO: 需要在 Xcode 中添加 Managers/ExportManager.swift 到项目
-        // 然后取消下面的注释
-        
-        /*
-        // 获取所有专注会话
-        let fetchDescriptor = FetchDescriptor<FocusSession>()
-        guard let sessions = try? modelContext.fetch(fetchDescriptor) else {
-            print("❌ 获取数据失败")
-            return
-        }
-        
-        guard let url = ExportManager.shared.exportFocusDataAsCSV(sessions: sessions) else {
-            print("❌ 导出失败")
-            return
-        }
-        
-        ExportManager.shared.shareFile(url: url)
-        */
-        
-        print("⚠️ 请先在 Xcode 中添加 ExportManager.swift 到项目")
+        print("⚠️ 导出功能即将推出")
     }
     
     private func exportStatsReport() {
-        // TODO: 需要在 Xcode 中添加 Managers/ExportManager.swift 到项目
-        // 然后取消下面的注释
-        
-        /*
-        let statsManager = StatsManager()
-        
-        guard let url = ExportManager.shared.exportStatsAsText(
-            totalSessions: statsManager.totalSessions,
-            totalFocusTime: statsManager.totalFocusTime,
-            currentStreak: statsManager.currentStreak,
-            longestStreak: statsManager.longestStreak,
-            todaySessions: statsManager.todaySessions,
-            todayFocusTime: statsManager.todayFocusTime
-        ) else {
-            print("❌ 导出失败")
-            return
-        }
-        
-        ExportManager.shared.shareFile(url: url)
-        */
-        
-        print("⚠️ 请先在 Xcode 中添加 ExportManager.swift 到项目")
+        print("⚠️ 导出功能即将推出")
     }
 }
 
